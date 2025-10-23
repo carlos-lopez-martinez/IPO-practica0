@@ -40,7 +40,7 @@
         
         /* PROBLEMA: Texto muy pequeño */
         .texto-pequeño {
-            font-size: 10px;
+            font-size: 16px;
             color: #888;
         }
     </style>
@@ -56,7 +56,7 @@
         <div class="container">
             <!-- PROBLEMA: Múltiples H1 en la página -->
             <h1>Bienvenido a TechHub</h1>
-            <h1>Tu portal tecnológico</h1>
+            <h2>Tu portal tecnológico</h2>
             
             <!-- PROBLEMA: Párrafo importante sin estructura semántica -->
             <div>Descubre las últimas tendencias en tecnología, programación y desarrollo web. 
@@ -73,7 +73,7 @@
     <div class="navbar navbar-expand-lg" style="background-color: #f8f9fa;">
         <div class="container">
             <!-- PROBLEMA: Logo sin texto alternativo -->
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23007bff'/%3E%3C/svg%3E" class="me-2">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23007bff'/%3E%3C/svg%3E" alt="Logo de Home" class="me-2">
             
             <!-- PROBLEMA: Links de navegación sin estructura semántica -->
             <div>
@@ -96,7 +96,7 @@
         <div class="row">
             <!-- PROBLEMA: Jerarquía de encabezados incorrecta -->
             <div class="col-md-8">
-                <h4>Últimas noticias tecnológicas</h4>
+                <h3>Últimas noticias tecnológicas</h3>
                 
                 <!-- PROBLEMA: Artículos sin estructura semántica -->
                 <div class="feature-card">
@@ -105,7 +105,7 @@
                          alt="Imagen de JavaScript" class="mb-3">
                     
                     <!-- PROBLEMA: Encabezado no descriptivo -->
-                    <h5>Nuevo</h5>
+                    </h4>Nuevo</h4>
                     <p>Las nuevas características de JavaScript ES2024 que debes conocer. 
                        Aprende sobre las últimas funcionalidades del lenguaje más popular.</p>
                     
@@ -116,16 +116,16 @@
                 <div class="feature-card">
                     <!-- PROBLEMA: Imagen sin texto alternativo -->
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%2328a745'/%3E%3C/svg%3E" 
-                         class="mb-3">
+                        alt="Imagen de React" class="mb-3">
                     
-                    <h5>Tutorial completo de React Hooks</h5>
+                    <h4>Tutorial completo de React Hooks</h4>
                     <p>Domina los React Hooks con este tutorial paso a paso. 
                        Desde useState hasta hooks personalizados.</p>
                     
                     <!-- PROBLEMA: Botón que no es botón -->
-                    <div class="btn btn-outline-success" onclick="location.href='#'">
+                    <button class="btn btn-outline-success" onclick="location.href='#'" aria-label="Leer tutorial completo de React Hooks">
                         Leer tutorial
-                    </div>
+                    </button>
                 </div>
                 
                 <!-- PROBLEMA: Contenido importante sin estructura -->
@@ -162,14 +162,16 @@
                 
                 <!-- PROBLEMA: Formulario sin labels ni estructura accesible -->
                 <div class="mt-4 p-3" style="background-color: #f0f0f0;">
-                    <h6>Newsletter</h6>
+                    <h3>Newsletter</h3>
                     <form>
                         <!-- PROBLEMA: Input sin label -->
-                        <input type="email" placeholder="Tu email" class="form-control mb-2">
+                        <label for="email" id="email-label" class="visually-hidden">Email:</label>
+                        <input type="email" id="email" aria-labelledby="email-label" placeholder="Tu email" class="form-control mb-2">
                         
                         <!-- PROBLEMA: Checkbox sin label asociado -->
-                        <input type="checkbox" id="acepto"> Acepto términos y condiciones
-                        
+                        <label for="checkbox" id="checkbox-label" class="visually-hidden">Acepto términos y condiciones</label>
+                        <input type="checkbox" id="checkbox" aria-labelledby="checkbox-label"> Acepto términos y condiciones
+
                         <!-- PROBLEMA: Botón de envío sin indicar acción -->
                         <button type="submit" class="btn btn-sm btn-primary btn-invisible">Enviar</button>
                     </form>
@@ -177,7 +179,7 @@
                 
                 <!-- PROBLEMA: Widget sin estructura semántica -->
                 <div class="mt-4 p-3 border">
-                    <h6>Clima</h6>
+                    <h3>Clima</h3>
                     <!-- PROBLEMA: Información importante sin estructura -->
                     <div>Madrid: 22°C ☀️</div>
                     <div>Barcelona: 18°C ⛅</div>
@@ -198,7 +200,7 @@
                     <div class="text-center">
                         <!-- PROBLEMA: Avatar sin descripción -->
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23007bff'/%3E%3C/svg%3E" 
-                             class="rounded-circle mb-3">
+                            alt="Avatar de María García" class="rounded-circle mb-3">
                         <p>"Excelente contenido y muy útil para aprender programación."</p>
                         <!-- PROBLEMA: Autor sin marcado semántico -->
                         <div>- María García</div>
@@ -209,7 +211,7 @@
                 <div class="col-md-4">
                     <div class="text-center">
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%2328a745'/%3E%3C/svg%3E" 
-                             class="rounded-circle mb-3">
+                             alt="Avatar de Juan Rodríguez" class="rounded-circle mb-3">
                         <p>"Los tutoriales son muy claros y fáciles de seguir."</p>
                         <div>- Juan Rodríguez</div>
                         <div class="texto-pequeño">Estudiante</div>
@@ -219,7 +221,7 @@
                 <div class="col-md-4">
                     <div class="text-center">
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23ffc107'/%3E%3C/svg%3E" 
-                             class="rounded-circle mb-3">
+                             alt="Avatar de Ana López" class="rounded-circle mb-3">
                         <p>"Siempre encuentro respuestas a mis dudas técnicas."</p>
                         <div>- Ana López</div>
                         <div class="texto-pequeño">Full Stack Developer</div>
@@ -235,14 +237,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <!-- PROBLEMA: Información de contacto sin estructura -->
-                    <h5>Contacto</h5>
+                    <h4>Contacto</h4>
                     <div>Email: info@techhub.com</div>
                     <div>Teléfono: +34 900 123 456</div>
                     <div>Dirección: Calle Ejemplo 123, Madrid</div>
                 </div>
                 
                 <div class="col-md-6">
-                    <h5>Síguenos</h5>
+                    <h4>Síguenos</h4>
                     <!-- PROBLEMA: Enlaces sociales sin texto descriptivo -->
                     <div>
                         <a href="#" class="text-white me-3">📘</a>
