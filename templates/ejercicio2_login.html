@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,33 +100,33 @@
             <div class="login-card">
                 <div class="row g-0">
                     <!-- Panel izquierdo con información -->
-                    <div class="col-lg-6 login-header">
+                    <div class="col-lg-6 login-header" role="banner">
                         <!-- PROBLEMA: Encabezado sin estructura apropiada -->
-                        <div style="font-size: 2.5rem; font-weight: bold;">TechHub</div>
-                        <div style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9;">
+                        <h1 style="font-size: 2.5rem; font-weight: bold;">TechHub</h1>
+                        <h2 style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9;">
                             Accede a tu cuenta para disfrutar de contenido exclusivo
-                        </div>
+                        </h2>
                         
                         <!-- PROBLEMA: Lista de beneficios sin estructura semántica -->
-                        <div style="margin-top: 2rem; text-align: left;">
-                            <div style="margin-bottom: 1rem;">
+                        <ul style="margin-top: 2rem; text-align: left;">
+                            <li style="margin-bottom: 1rem;">
                                 <!-- PROBLEMA: Iconos sin descripción -->
                                 ✅ Artículos premium exclusivos
-                            </div>
-                            <div style="margin-bottom: 1rem;">
+                            </li>
+                            <li style="margin-bottom: 1rem;">
                                 ✅ Tutoriales paso a paso
-                            </div>
-                            <div style="margin-bottom: 1rem;">
+                            </li>
+                            <li style="margin-bottom: 1rem;">
                                 ✅ Comunidad de desarrolladores
-                            </div>
-                            <div style="margin-bottom: 1rem;">
+                            </li>
+                            <li style="margin-bottom: 1rem;">
                                 ✅ Soporte prioritario
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
                     
                     <!-- Panel derecho con formulario -->
-                    <div class="col-lg-6 login-form">
+                    <div class="col-lg-6 login-form" role="main">
                         <!-- PROBLEMA: Formulario sin landmark apropiado -->
                         <div>
                             <!-- PROBLEMA: Encabezado sin nivel apropiado -->
@@ -148,9 +148,12 @@
                                            class="form-control" 
                                            name="email"
                                            placeholder="tu@email.com"
-                                           autocomplete="email">
+                                           autocomplete="email"
+                                           aria-required="true"
+                                           aria-describedby="emailError"
+                                           aria-label="Correo Electrónico">
                                     <!-- PROBLEMA: Mensaje de error no asociado -->
-                                    <div class="form-error" style="display: none;">
+                                    <div id="emailError" class="form-error" style="display: none;">
                                         El email es requerido
                                     </div>
                                 </div>
@@ -164,16 +167,23 @@
                                                class="form-control" 
                                                name="password"
                                                placeholder="Tu contraseña"
-                                               autocomplete="current-password">
+                                               autocomplete="current-password"
+                                               aria-required="true"
+                                               aria-describedby="passwordError"
+                                               aria-label="Contraseña">
                                         
                                         <!-- PROBLEMA: Botón toggle sin descripción accesible -->
                                         <span class="password-toggle" 
                                               style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"
-                                              onclick="togglePassword()">
+                                              onclick="togglePassword()"
+                                              aria-label="Mostrar u ocultar contraseña"
+                                              role="button"
+                                              tabindex="0"
+                                              onkeydown="if(event.key === 'Enter' || event.key === ' ') togglePassword();">
                                             👁️
                                         </span>
                                     </div>
-                                    <div class="form-error" style="display: none;">
+                                    <div id="passwordError" class="form-error" style="display: none;">
                                         La contraseña es requerida
                                     </div>
                                     
@@ -195,7 +205,7 @@
                                     <div style="display: flex; align-items: center; justify-content: space-between;">
                                         <div>
                                             <!-- PROBLEMA: Checkbox sin label apropiado -->
-                                            <input type="checkbox" name="remember" style="margin-right: 0.5rem;">
+                                            <input type="checkbox" aria-label="Recordar mi sesión" name="remember" style="margin-right: 0.5rem;">
                                             Recordar mi sesión
                                         </div>
                                         
@@ -216,10 +226,10 @@
                                         <div style="display: flex; align-items: center; gap: 1rem;">
                                             <!-- PROBLEMA: Imagen CAPTCHA sin alternativa -->
                                             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='50'%3E%3Crect width='150' height='50' fill='%23f8f9fa'/%3E%3Ctext x='75' y='30' text-anchor='middle' fill='%23333' font-size='16'%3E7H2K9%3C/text%3E%3C/svg%3E"
-                                                 style="border: 1px solid #ddd;">
+                                                 style="border: 1px solid #ddd;" alt="Imagen CAPTCHA mostrando el código 7H2K9">
                                             
                                             <!-- PROBLEMA: Botón refresh sin descripción -->
-                                            <button type="button" onclick="refreshCaptcha()" style="border: none; background: none; font-size: 1.2rem; cursor: pointer;">
+                                            <button type="button" onclick="refreshCaptcha()" style="border: none; background: none; font-size: 1.2rem; cursor: pointer;" aria-label="Refrescar código CAPTCHA">
                                                 🔄
                                             </button>
                                         </div>
@@ -230,9 +240,12 @@
                                            class="form-control" 
                                            name="captcha"
                                            placeholder="Ingresa el código que ves arriba"
-                                           style="font-family: monospace;">
+                                           style="font-family: monospace;"
+                                           aria-required="true"
+                                           aria-describedby="captchaError"
+                                           aria-label="Código CAPTCHA">
                                     
-                                    <div class="form-error" style="display: none;">
+                                    <div id="captchaError" class="form-error" style="display: none;">
                                         El código CAPTCHA es incorrecto
                                     </div>
                                 </div>
@@ -240,7 +253,7 @@
                                 <!-- Términos y condiciones - PROBLEMAS -->
                                 <div class="mb-4">
                                     <!-- PROBLEMA: Checkbox obligatorio sin indicación -->
-                                    <input type="checkbox" name="terms" style="margin-right: 0.5rem;">
+                                    <input type="checkbox" name="terms" style="margin-right: 0.5rem;" aria-required="true" aria-describedby="termsError" aria-label="Aceptar términos y condiciones">
                                     <span style="font-size: 0.9rem;">
                                         Acepto los 
                                         <!-- PROBLEMA: Links sin indicar que abren en nueva ventana -->
@@ -248,7 +261,7 @@
                                         y la 
                                         <a href="#" target="_blank">política de privacidad</a>
                                     </span>
-                                    <div class="form-error" style="display: none;">
+                                    <div id="termsError" class="form-error" style="display: none;">
                                         Debes aceptar los términos y condiciones
                                     </div>
                                 </div>
@@ -259,7 +272,8 @@
                                     <button type="submit" 
                                             class="btn btn-primary w-100" 
                                             style="padding: 0.75rem;">
-                                        Iniciar Sesión
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                            Iniciar Sesión
                                     </button>
                                 </div>
                                 
