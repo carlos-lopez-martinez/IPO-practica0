@@ -50,28 +50,29 @@
 <body lang="es">
 
     <!-- PROBLEMA: Falta skip link -->
-    
 
     <!-- PROBLEMA: Header sin role banner -->
-    <div class="hero-section">
+    <header role="banner" class="hero-section">
         <div class="container">
             <!-- PROBLEMA: Múltiples H1 en la página -->
             <h1>Bienvenido a TechHub</h1>
             <h2>Tu portal tecnológico</h2>
             
             <!-- PROBLEMA: Párrafo importante sin estructura semántica -->
-            <p>Descubre las últimas tendencias en tecnología, programación y desarrollo web. 
+            <section>
+                <p>Descubre las últimas tendencias en tecnología, programación y desarrollo web. 
                  Mantente actualizado con nuestros artículos y tutoriales.</p>
-            
+            </section>
+    
             <!-- PROBLEMA: Botón importante sin aria-label -->
             <button class="btn btn-primary btn-lg mt-3" onclick="alert('¡Funciona!')" tabindex="1" aria-label="Comenzar ahora">
                 Comenzar ahora
             </button>
         </div>
-    </div>
+    </header>
     
     <!-- PROBLEMA: Nav sin role navigation ni aria-label -->
-    <div class="navbar navbar-expand-lg" style="background-color: #f8f9fa;" role="navigation" aria-label="Navegación principal">
+    <nav class="navbar navbar-expand-lg" style="background-color: #f8f9fa;" role="navigation" aria-label="Navegación principal">
         <div class="container">
             <!-- PROBLEMA: Logo sin texto alternativo -->
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23007bff'/%3E%3C/svg%3E" alt="Logo de Home" class="me-2" tabindex="2">
@@ -88,111 +89,114 @@
                 <a href="#" class="link-sutil" tabindex="7">Leer más</a>
             </div>
         </div>
-    </div>
+    </nav>
     
     <!-- PROBLEMA: Contenido principal sin main ni landmark -->
-    <div class="container my-5">
+    <main class="container my-5">
         
         <!-- PROBLEMA: Sección sin encabezado ni landmark apropiado -->
-        <div class="row">
-            <!-- PROBLEMA: Jerarquía de encabezados incorrecta -->
-            <div class="col-md-8">
-                <h3>Últimas noticias tecnológicas</h3>
-                
-                <!-- PROBLEMA: Artículos sin estructura semántica -->
-                <div class="feature-card">
-                    <!-- PROBLEMA: Imagen decorativa con alt text -->
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23ffc107'/%3E%3C/svg%3E" 
-                         alt="Imagen de JavaScript" class="mb-3">
+        <section>
+            <div class = "row">
+                <!-- PROBLEMA: Jerarquía de encabezados incorrecta -->
+                <div class="col-md-8">
+                    <h3>Últimas noticias tecnológicas</h3>
                     
-                    <!-- PROBLEMA: Encabezado no descriptivo -->
-                    </h4>Nuevo</h4>
-                    <p>Las nuevas características de JavaScript ES2024 que debes conocer. 
-                       Aprende sobre las últimas funcionalidades del lenguaje más popular.</p>
+                    <!-- PROBLEMA: Artículos sin estructura semántica -->
+                    <div class="feature-card">
+                        <!-- PROBLEMA: Imagen decorativa con alt text -->
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23ffc107'/%3E%3C/svg%3E" 
+                            alt="Imagen de JavaScript" class="mb-3">
+                        
+                        <!-- PROBLEMA: Encabezado no descriptivo -->
+                        <h4>Nuevo artículo sobre última versión de JavaScript</h4>
+                        <p>Las nuevas características de JavaScript ES2024 que debes conocer. 
+                        Aprende sobre las últimas funcionalidades del lenguaje más popular.</p>
+                        
+                        <!-- PROBLEMA: Link sin contexto -->
+                        <a href="#" class="btn btn-outline-primary" tabindex="8">Ver más</a>
+                    </div>
                     
-                    <!-- PROBLEMA: Link sin contexto -->
-                    <a href="#" class="btn btn-outline-primary" tabindex="8">Ver más</a>
+                    <div class="feature-card" tabindex="9">
+                        <!-- PROBLEMA: Imagen sin texto alternativo -->
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%2328a745'/%3E%3C/svg%3E" 
+                            alt="Imagen de React" class="mb-3">
+                        
+                        <h4 tabindex="10">Tutorial completo de React Hooks</h4>
+                        <p>Domina los React Hooks con este tutorial paso a paso. 
+                        Desde useState hasta hooks personalizados.</p>
+                        
+                        <!-- PROBLEMA: Botón que no es botón -->
+                        <button class="btn btn-outline-success" onclick="location.href='#'" aria-label="Leer tutorial completo de React Hooks" tabindex="11">
+                            Leer tutorial
+                        </button>
+                    </div>
+                    
+                    <!-- PROBLEMA: Contenido importante sin estructura -->
+                    <div style="border: 2px solid red; padding: 1rem; margin: 1rem 0;" role="alert" tabindex="12">
+                        ⚠️ AVISO IMPORTANTE: El sitio estará en mantenimiento el próximo domingo de 2:00 a 4:00 AM
+                    </div>
                 </div>
                 
-                <div class="feature-card" tabindex="9">
-                    <!-- PROBLEMA: Imagen sin texto alternativo -->
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%2328a745'/%3E%3C/svg%3E" 
-                        alt="Imagen de React" class="mb-3">
+                <!-- PROBLEMA: Sidebar sin landmark apropiado -->
+                <div class="col-md-4">
+                    <!-- PROBLEMA: Encabezado con nivel incorrecto -->
+                    <h2 tabindex="13">Recursos populares</h2>
                     
-                    <h4 tabindex="10">Tutorial completo de React Hooks</h4>
-                    <p>Domina los React Hooks con este tutorial paso a paso. 
-                       Desde useState hasta hooks personalizados.</p>
+                    <!-- PROBLEMA: Lista no semántica -->
+                    <div class="list-group">
+                        <!-- PROBLEMA: Links repetitivos sin diferenciación -->
+                        <div class="list-group-item">
+                            <a href="#" tabindex="14">Guía de CSS Grid</a>
+                            <span class="texto-pequeño">hace 2 días</span>
+                        </div>
+                        <div class="list-group-item">
+                            <a href="#" tabindex="15">Introducción a TypeScript</a>
+                            <span class="texto-pequeño">hace 5 días</span>
+                        </div>
+                        <div class="list-group-item">
+                            <a href="#" tabindex="16">Node.js para principiantes</a>
+                            <span class="texto-pequeño">hace 1 semana</span>
+                        </div>
+                        <div class="list-group-item">
+                            <a href="#" tabindex="17">Responsive Design tips</a>
+                            <span class="texto-pequeño">hace 2 semanas</span>
+                        </div>
+                    </div>
                     
-                    <!-- PROBLEMA: Botón que no es botón -->
-                    <button class="btn btn-outline-success" onclick="location.href='#'" aria-label="Leer tutorial completo de React Hooks" tabindex="11">
-                        Leer tutorial
-                    </button>
-                </div>
-                
-                <!-- PROBLEMA: Contenido importante sin estructura -->
-                <div style="border: 2px solid red; padding: 1rem; margin: 1rem 0;" role="alert" tabindex="12">
-                    ⚠️ AVISO IMPORTANTE: El sitio estará en mantenimiento el próximo domingo de 2:00 a 4:00 AM
+                    <!-- PROBLEMA: Formulario sin labels ni estructura accesible -->
+                    <div class="mt-4 p-3" style="background-color: #f0f0f0;">
+                        <h3 tabindex="18">Newsletter</h3>
+                        <form>
+                            <!-- PROBLEMA: Input sin label -->
+                            <label for="email" id="email-label" class="visually-hidden">Email:</label>
+                            <input type="email" id="email" aria-labelledby="email-label" placeholder="Tu email" class="form-control mb-2" tabindex="19">
+                            
+                            <!-- PROBLEMA: Checkbox sin label asociado -->
+                            <label for="checkbox" id="checkbox-label" class="visually-hidden">Acepto términos y condiciones</label>
+                            <input type="checkbox" id="checkbox" aria-labelledby="checkbox-label" tabindex="20"> Acepto términos y condiciones
+
+                            <!-- PROBLEMA: Botón de envío sin indicar acción -->
+                            <button type="submit" class="btn btn-sm btn-primary btn-invisible" tabindex="21">Enviar</button>
+                        </form>
+                    </div>
+                    
+                    <!-- PROBLEMA: Widget sin estructura semántica -->
+                    <div class="mt-4 p-3 border">
+                        <h3 tabindex="22">Clima</h3>
+                        <!-- PROBLEMA: Información importante sin estructura -->
+                        <div tabindex="23">Madrid: 22°C ☀️</div>
+                        <div tabindex="24">Barcelona: 18°C ⛅</div>
+                        <div tabindex="25">Valencia: 25°C ☀️</div>
+                        <!-- PROBLEMA: Última actualización sin contexto temporal -->
+                        <div class="texto-pequeño" aria-label="Última actualización">Actualizado: 14:30</div>
+                    </div>
                 </div>
             </div>
             
-            <!-- PROBLEMA: Sidebar sin landmark apropiado -->
-            <div class="col-md-4">
-                <!-- PROBLEMA: Encabezado con nivel incorrecto -->
-                <h2 tabindex="13">Recursos populares</h2>
-                
-                <!-- PROBLEMA: Lista no semántica -->
-                <div class="list-group">
-                    <!-- PROBLEMA: Links repetitivos sin diferenciación -->
-                    <div class="list-group-item">
-                        <a href="#" tabindex="14">Guía de CSS Grid</a>
-                        <span class="texto-pequeño">hace 2 días</span>
-                    </div>
-                    <div class="list-group-item">
-                        <a href="#" tabindex="15">Introducción a TypeScript</a>
-                        <span class="texto-pequeño">hace 5 días</span>
-                    </div>
-                    <div class="list-group-item">
-                        <a href="#" tabindex="16">Node.js para principiantes</a>
-                        <span class="texto-pequeño">hace 1 semana</span>
-                    </div>
-                    <div class="list-group-item">
-                        <a href="#" tabindex="17">Responsive Design tips</a>
-                        <span class="texto-pequeño">hace 2 semanas</span>
-                    </div>
-                </div>
-                
-                <!-- PROBLEMA: Formulario sin labels ni estructura accesible -->
-                <div class="mt-4 p-3" style="background-color: #f0f0f0;">
-                    <h3 tabindex="18">Newsletter</h3>
-                    <form>
-                        <!-- PROBLEMA: Input sin label -->
-                        <label for="email" id="email-label" class="visually-hidden">Email:</label>
-                        <input type="email" id="email" aria-labelledby="email-label" placeholder="Tu email" class="form-control mb-2" tabindex="19">
-                        
-                        <!-- PROBLEMA: Checkbox sin label asociado -->
-                        <label for="checkbox" id="checkbox-label" class="visually-hidden">Acepto términos y condiciones</label>
-                        <input type="checkbox" id="checkbox" aria-labelledby="checkbox-label" tabindex="20"> Acepto términos y condiciones
-
-                        <!-- PROBLEMA: Botón de envío sin indicar acción -->
-                        <button type="submit" class="btn btn-sm btn-primary btn-invisible" tabindex="21">Enviar</button>
-                    </form>
-                </div>
-                
-                <!-- PROBLEMA: Widget sin estructura semántica -->
-                <div class="mt-4 p-3 border">
-                    <h3 tabindex="22">Clima</h3>
-                    <!-- PROBLEMA: Información importante sin estructura -->
-                    <div tabindex="23">Madrid: 22°C ☀️</div>
-                    <div tabindex="24">Barcelona: 18°C ⛅</div>
-                    <div tabindex="25">Valencia: 25°C ☀️</div>
-                    <!-- PROBLEMA: Última actualización sin contexto temporal -->
-                    <div class="texto-pequeño" aria-label="Última actualización">Actualizado: 14:30</div>
-                </div>
-            </div>
-        </div>
+        </section>
         
         <!-- PROBLEMA: Sección de testimonios sin estructura -->
-        <div class="mt-5">
+        <section class="mt-5">
             <h3>Lo que dicen nuestros usuarios</h3>
             
             <div class="row">
@@ -229,11 +233,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
     
     <!-- PROBLEMA: Footer sin role contentinfo -->
-    <div style="background-color: #343a40; color: white; padding: 3rem 0; margin-top: 3rem;">
+    <footer role="contentinfo" style="background-color: #343a40; color: white; padding: 3rem 0; margin-top: 3rem;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -261,7 +265,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
     
     <!-- PROBLEMA: Scripts sin defer/async apropiado -->
     <script src="{{ url_for('static', filename='js/portal.js') }}" defer></script>
