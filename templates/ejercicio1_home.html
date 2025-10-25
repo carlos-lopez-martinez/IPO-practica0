@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- PROBLEMA INTENCIONADO: Título no descriptivo -->
-    <title>Home</title>
+    <title>Ejercicio 1 - Home</title>
     
     <!-- PROBLEMA: Falta descripción meta -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -47,10 +47,11 @@
 </head>
 
 <!-- PROBLEMA: Lang incorrecto para contenido en español -->
-<body lang="en">
+<body lang="es">
 
     <!-- PROBLEMA: Falta skip link -->
     
+
     <!-- PROBLEMA: Header sin role banner -->
     <div class="hero-section">
         <div class="container">
@@ -59,18 +60,18 @@
             <h2>Tu portal tecnológico</h2>
             
             <!-- PROBLEMA: Párrafo importante sin estructura semántica -->
-            <div>Descubre las últimas tendencias en tecnología, programación y desarrollo web. 
-                 Mantente actualizado con nuestros artículos y tutoriales.</div>
+            <p>Descubre las últimas tendencias en tecnología, programación y desarrollo web. 
+                 Mantente actualizado con nuestros artículos y tutoriales.</p>
             
             <!-- PROBLEMA: Botón importante sin aria-label -->
-            <button class="btn btn-primary btn-lg mt-3" onclick="alert('¡Funciona!')" tabindex="1">
+            <button class="btn btn-primary btn-lg mt-3" onclick="alert('¡Funciona!')" tabindex="1" aria-label="Comenzar ahora">
                 Comenzar ahora
             </button>
         </div>
     </div>
     
     <!-- PROBLEMA: Nav sin role navigation ni aria-label -->
-    <div class="navbar navbar-expand-lg" style="background-color: #f8f9fa;">
+    <div class="navbar navbar-expand-lg" style="background-color: #f8f9fa;" role="navigation" aria-label="Navegación principal">
         <div class="container">
             <!-- PROBLEMA: Logo sin texto alternativo -->
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23007bff'/%3E%3C/svg%3E" alt="Logo de Home" class="me-2" tabindex="2">
