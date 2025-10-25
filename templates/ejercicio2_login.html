@@ -28,7 +28,7 @@
         }
         
         .login-header {
-            background: linear-gradient(45deg, #007bff, #0056b3);
+            background: linear-gradient(45deg, #003289, #0056b3);
             color: white;
             padding: 3rem 2rem;
             text-align: center;
@@ -89,6 +89,22 @@
             background: #f8f9fa;
             border-radius: 5px;
             margin: 1rem 0;
+        }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #003289;
+            color: white;
+            padding: 8px 16px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        .btn-outline-light
+        {
+            color: white;
+            border-color: white;
+            background-color: #7700FF;
         }
     </style>
 </head>
@@ -192,10 +208,12 @@
                                               onkeydown="if(event.key === 'Enter' || event.key === ' ') togglePassword();">
                                             👁️
                                         </span>
+
+                                        <div id="passwordError" class="form-error" style="display: none;">
+                                            La contraseña es requerida
+                                        </div>
                                     </div>
-                                    <div id="passwordError" class="form-error" style="display: none;">
-                                        La contraseña es requerida
-                                    </div>
+                                    
                                     
                                     <!-- PROBLEMA: Indicador de fortaleza sin accesibilidad -->
                                     <div style="margin-top: 0.5rem;"  aria-labelledby="passwordStrengthLabel">
@@ -215,12 +233,12 @@
                                     <div style="display: flex; align-items: center; justify-content: space-between;">
                                         <div>
                                             <!-- PROBLEMA: Checkbox sin label apropiado -->
-                                             <label for="remember">Recordar mi sesión</label>
-                                            <input type="checkbox" aria-labelledby="remember" name="remember" style="margin-right: 0.5rem;">
+                                            <label for="remember">Recordar mi sesión</label>
+                                            <input type="checkbox" aria-labelledby="remember" name="remember" id="remember" style="margin-right: 0.5rem;">
                                         </div>
                                         
                                         <!-- PROBLEMA: Link sin contexto -->
-                                        <a href="#" style="color: #007bff; font-size: 0.9rem;" aria-label="¿Olvidaste tu contraseña?">
+                                        <a href="#" style="color: #003289; font-size: 0.9rem;" aria-label="¿Olvidaste tu contraseña?">
                                             ¿Olvidaste tu contraseña?
                                         </a>
                                     </div>
@@ -318,7 +336,7 @@
                                 <div class="text-center mt-4">
                                     <span style="color: #6c757d;">¿No tienes una cuenta?</span>
                                     <!-- PROBLEMA: Link sin contexto claro -->
-                                    <a href="#" style="color: #007bff; margin-left: 0.5rem;" aria-label="Regístrate aquí para crear una cuenta">
+                                    <a href="#" style="color: #003289; margin-left: 0.5rem;" aria-label="Regístrate aquí para crear una cuenta">
                                         Regístrate aquí
                                     </a>
                                 </div>
@@ -441,6 +459,7 @@
             field.classList.add('error-state');
             errorDiv.style.display = 'block';
             errorDiv.textContent = message;
+            anunciarMensaje(message);
             
             // PROBLEMA: No enfoca el campo con error
             // PROBLEMA: No usa aria-invalid
@@ -578,21 +597,25 @@
                 if (!email) {
                     showError('email', 'El correo electrónico es requerido');
                     hasErrors = true;
+                    return;
                 }
                 
                 if (!password) {
                     showError('password', 'La contraseña es requerida');
                     hasErrors = true;
+                    
                 }
                 
                 if (!captcha) {
                     showError('captcha', 'El código CAPTCHA es requerido');
                     hasErrors = true;
+                    
                 }
                 
                 if (!terms) {
                     showError('terms', 'Debes aceptar los términos y condiciones');
                     hasErrors = true;
+                    
                 }
                 
                 if (hasErrors) {
