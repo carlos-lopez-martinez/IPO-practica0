@@ -76,7 +76,7 @@
             </section>
     
             <!-- PROBLEMA: Botón importante sin aria-label -->
-            <button class="btn btn-primary btn-lg mt-3" onclick="alert('¡Funciona!')" tabindex="1" aria-label="Comenzar ahora">
+            <button class="btn btn-primary btn-lg mt-3" onclick="alert('¡Funciona!')" aria-label="Comenzar ahora">
                 Comenzar ahora
             </button>
         </div>
@@ -86,18 +86,18 @@
     <nav class="navbar navbar-expand-lg" style="background-color: #f8f9fa;" role="navigation" aria-label="Navegación principal">
         <div class="container">
             <!-- PROBLEMA: Logo sin texto alternativo -->
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23007bff'/%3E%3C/svg%3E" alt="Logo de Home" class="me-2" tabindex="2">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23007bff'/%3E%3C/svg%3E" alt="Logo de Home" class="me-2">
             
             <!-- PROBLEMA: Links de navegación sin estructura semántica -->
             <div>
                 <!-- PROBLEMA: Links sin contexto -->
-                <a href="#" class="me-3 link-nav" tabindex="3">Inicio</a>
-                <a href="#" class="me-3 link-nav" tabindex="4">Artículos</a>
-                <a href="#" class="me-3 link-nav" tabindex="5">Tutoriales</a>
-                <a href="#" class="me-3 link-nav" tabindex="6">Contacto</a>
-                
+                <a href="#" class="me-3 link-nav">Inicio</a>
+                <a href="#" class="me-3 link-nav">Artículos</a>
+                <a href="#" class="me-3 link-nav">Tutoriales</a>
+                <a href="#" class="me-3 link-nav">Contacto</a>
+
                 <!-- PROBLEMA: Texto de link genérico -->
-                <a href="#" class="link-sutil" tabindex="7">Leer más</a>
+                <a href="#" class="link-sutil">Leer más</a>
             </div>
         </div>
     </nav>
@@ -124,82 +124,82 @@
                         Aprende sobre las últimas funcionalidades del lenguaje más popular.</p>
                         
                         <!-- PROBLEMA: Link sin contexto -->
-                        <a href="#" class="btn btn-outline-primary" tabindex="8">Ver más</a>
+                        <a href="#" class="btn btn-outline-primary">Ver más</a>
                     </div>
                     
-                    <div class="feature-card" tabindex="9">
+                    <div class="feature-card" >
                         <!-- PROBLEMA: Imagen sin texto alternativo -->
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%2328a745'/%3E%3C/svg%3E" 
                             alt="Imagen de React" class="mb-3">
                         
-                        <h4 tabindex="10">Tutorial completo de React Hooks</h4>
+                        <h4>Tutorial completo de React Hooks</h4>
                         <p>Domina los React Hooks con este tutorial paso a paso. 
                         Desde useState hasta hooks personalizados.</p>
                         
                         <!-- PROBLEMA: Botón que no es botón -->
-                        <button class="btn btn-outline-success" onclick="location.href='#'" aria-label="Leer tutorial completo de React Hooks" tabindex="11">
+                        <button class="btn btn-outline-success" onclick="location.href='#'" aria-label="Leer tutorial completo de React Hooks">
                             Leer tutorial
                         </button>
                     </div>
                     
                     <!-- PROBLEMA: Contenido importante sin estructura -->
-                    <div style="border: 2px solid red; padding: 1rem; margin: 1rem 0;" role="alert" tabindex="12">
+                    <div style="border: 2px solid red; padding: 1rem; margin: 1rem 0;" role="alert">
                         <p>
                             ⚠️ AVISO IMPORTANTE: El sitio estará en mantenimiento el próximo domingo de 2:00 a 4:00 AM.
                         </p>
                     </div>
                 </div>
                 
-                <!-- PROBLEMA: Sidebar sin landmark apropiado -->
+                    <!-- PROBLEMA: Sidebar sin landmark apropiado -->
                 <div class="col-md-4">
                     <!-- PROBLEMA: Encabezado con nivel incorrecto -->
-                    <h2 tabindex="13">Recursos populares</h2>
+                    <h2>Recursos populares</h2>
                     
                     <!-- PROBLEMA: Lista no semántica -->
                     <ul class="list-group">
                         <!-- PROBLEMA: Links repetitivos sin diferenciación -->
                         <li class="list-group-item">
-                            <a href="#" tabindex="14">Guía de CSS Grid</a>
+                            <a href="#">Guía de CSS Grid</a>
                             <span class="texto-pequeño">hace 2 días</span>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" tabindex="15">Introducción a TypeScript</a>
+                            <a href="#">Introducción a TypeScript</a>
                             <span class="texto-pequeño">hace 5 días</span>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" tabindex="16">Node.js para principiantes</a>
+                            <a href="#">Node.js para principiantes</a>
                             <span class="texto-pequeño">hace 1 semana</span>
                         </li>
                         <li class="list-group-item">
-                            <a href="#" tabindex="17">Responsive Design tips</a>
+                            <a href="#">Responsive Design tips</a>
                             <span class="texto-pequeño">hace 2 semanas</span>
                         </li>
                     </ul>
 
                     <!-- PROBLEMA: Formulario sin labels ni estructura accesible -->
                     <div class="mt-4 p-3" style="background-color: #f0f0f0;">
-                        <h3 tabindex="18">Newsletter</h3>
+                        <h3>Newsletter</h3>
                         <form>
                             <!-- PROBLEMA: Input sin label -->
                             <label for="email" id="email-label" class="visually-hidden">Email:</label>
-                            <input type="email" id="email" aria-labelledby="email-label" placeholder="Tu email" class="form-control mb-2" tabindex="19">
+                            <input type="email" id="email" aria-labelledby="email-label" placeholder="Tu email" class="form-control mb-2">
                             
                             <!-- PROBLEMA: Checkbox sin label asociado -->
                             <label for="checkbox" id="checkbox-label" class="visually-hidden">Acepto términos y condiciones</label>
-                            <input type="checkbox" id="checkbox" aria-labelledby="checkbox-label" tabindex="20"> Acepto términos y condiciones
+                            <input type="checkbox" id="checkbox" aria-labelledby="checkbox-label"> Acepto términos y condiciones
 
                             <!-- PROBLEMA: Botón de envío sin indicar acción -->
-                            <button type="submit" class="btn btn-sm btn-primary btn-invisible" tabindex="21">Enviar</button>
+                            <button type="submit" class="btn btn-sm btn-primary btn-invisible">Enviar</button>
                         </form>
                     </div>
                     
                     <!-- PROBLEMA: Widget sin estructura semántica -->
                     <div class="mt-4 p-3 border">
-                        <h3 tabindex="22">Clima</h3>
+                        <h3>Clima</h3>
                         <!-- PROBLEMA: Información importante sin estructura -->
-                        <div tabindex="23">Madrid: 22°C ☀️</div>
-                        <div tabindex="24">Barcelona: 18°C ⛅</div>
-                        <div tabindex="25">Valencia: 25°C ☀️</div>
+                        <div>Madrid: 22°C ☀️</div>
+                        <div>Barcelona: 18°C ⛅</div>
+                        <div>Valencia: 25°C ☀️</div>
                         <!-- PROBLEMA: Última actualización sin contexto temporal -->
                         <div class="texto-pequeño" aria-label="Última actualización">Actualizado: 14:30</div>
                     </div>
@@ -218,7 +218,7 @@
                     <div class="text-center">
                         <!-- PROBLEMA: Avatar sin descripción -->
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23007bff'/%3E%3C/svg%3E" 
-                            alt="Avatar de María García" class="rounded-circle mb-3" tabindex="26">
+                            alt="Avatar de María García" class="rounded-circle mb-3">
                         <p>"Excelente contenido y muy útil para aprender programación."</p>
                         <!-- PROBLEMA: Autor sin marcado semántico -->
                         <div>- María García</div>
@@ -229,7 +229,7 @@
                 <div class="col-md-4">
                     <div class="text-center">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%2328a745'/%3E%3C/svg%3E" 
-                        alt="Avatar de Juan Rodríguez" class="rounded-circle mb-3" tabindex="27">
+                        alt="Avatar de Juan Rodríguez" class="rounded-circle mb-3">
                         <p>"Los tutoriales son muy claros y fáciles de seguir."</p>
                         <div>- Juan Rodríguez</div>
                         <div class="texto-pequeño">Estudiante</div>
@@ -239,7 +239,7 @@
                 <div class="col-md-4">
                     <div class="text-center">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23ffc107'/%3E%3C/svg%3E" 
-                        alt="Avatar de Ana López" class="rounded-circle mb-3" tabindex="28">
+                        alt="Avatar de Ana López" class="rounded-circle mb-3">
                         <p>"Siempre encuentro respuestas a mis dudas técnicas."</p>
                         <div>- Ana López</div>
                         <div class="texto-pequeño">Full Stack Developer</div>
@@ -265,10 +265,10 @@
                     <h4>Síguenos</h4>
                     <!-- PROBLEMA: Enlaces sociales sin texto descriptivo -->
                     <div>
-                        <a href="#" class="text-white me-3" tabindex="29" aria-label="Facebook">📘 Facebook</a>
-                        <a href="#" class="text-white me-3" tabindex="30" aria-label="Twitter">🐦 Twitter</a>
-                        <a href="#" class="text-white me-3" tabindex="31" aria-label="LinkedIn">💼 LinkedIn</a>
-                        <a href="#" class="text-white" tabindex="32" aria-label="Instagram">📷 Instagram</a>
+                        <a href="#" class="text-white me-3" aria-label="Facebook">📘 Facebook</a>
+                        <a href="#" class="text-white me-3" aria-label="Twitter">🐦 Twitter</a>
+                        <a href="#" class="text-white me-3" aria-label="LinkedIn">💼 LinkedIn</a>
+                        <a href="#" class="text-white" aria-label="Instagram">📷 Instagram</a>
                     </div>
                     
                     <!-- PROBLEMA: Copyright sin marcado semántico -->
@@ -295,14 +295,6 @@
                 document.getElementById('messages').innerHTML = 
                     '<div style="position: fixed; top: 20px; right: 20px; background: #CF0606; color: white; padding: 1rem;">¡Nueva notificación!</div>';
             }, 3000);
-            
-            // PROBLEMA: Evento click sin manejo de teclado
-            document.querySelectorAll('.feature-card').forEach(function(card) {
-                card.addEventListener('click', function() {
-                    // Acción sin feedback accesible
-                    console.log('Card clicked');
-                });
-            });
         });
     </script>
     
