@@ -106,7 +106,7 @@
         
         /* Problemas de contraste intencionados */
         .subtle-text {
-            color: #ccc;
+            color: #636363;
         }
         
         .validation-message {
@@ -139,12 +139,12 @@
                 <header class="form-progress">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                         <h1 style="font-weight: 500; font-size: 1.2rem;">Registro de Usuario</h1>
-                        <div style="font-size: 0.9rem; color: #6c757d;">Paso 1 de 1</div>
+                        <div style="font-size: 0.9rem; color: #6D6F6F;">Paso 1 de 1</div>
                     </div>
                     <div class="progress-bar-custom">
                         <div class="progress-fill" style="width: 25%"></div>
                     </div>
-                    <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #6c757d;">
+                    <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #6D6F6F;">
                         Completando información personal...
                     </div>
                 </header>
@@ -156,7 +156,7 @@
                         <!-- Sección 1: Información Personal - MÚLTIPLES PROBLEMAS -->
                         <fieldset class="form-section">
                             <!-- PROBLEMA: Sin fieldset para agrupar -->
-                            <legend style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #007bff;">
+                            <legend style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #0A63C2;">
                                 📝 Información Personal
                             </legend>
                             
@@ -245,7 +245,7 @@
                         
                         <!-- Sección 2: Información Profesional - PROBLEMAS -->
                         <div class="form-section">
-                            <div style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #007bff;">
+                            <div style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #0A63C2;">
                                 💼 Información Profesional
                             </div>
                             
@@ -276,15 +276,17 @@
                                 
                                 <!-- Experiencia -->
                                 <div class="col-md-6 mb-3">
-                                    <div class="form-label">Años de experiencia</div>
+                                    <label id="label-experiencia" for="range-experiencia" class="form-label">Años de experiencia</label>
                                     <!-- PROBLEMA: Range input sin descripción accesible -->
                                     <input type="range" 
+                                        id="range-experiencia"
                                         class="form-range" 
                                         name="experience"
                                         min="0" 
                                         max="20" 
                                         value="2"
-                                        step="1">
+                                        step="1"
+                                        aria-labelledby="label-experiencia">
                                     <div class="range-display">
                                         <span>0 años</span>
                                         <span id="experienceValue">2 años</span>
@@ -384,7 +386,7 @@
                         
                         <!-- Sección 3: Preferencias y Configuración - PROBLEMAS -->
                         <div class="form-section">
-                            <div style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #007bff;">
+                            <div style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #0A63C2;">
                                 ⚙️ Preferencias y Configuración
                             </div>
                             
@@ -472,7 +474,7 @@
                         
                         <!-- Sección 4: Documentos y Archivos - PROBLEMAS CRÍTICOS -->
                         <div class="form-section">
-                            <div style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #007bff;">
+                            <div style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #0A63C2;">
                                 📎 Documentos y Archivos
                             </div>
                             
@@ -576,7 +578,7 @@
                         <div class="form-section">
                             <!-- PROBLEMA: Checkboxes legales sin fieldset -->
                             <fieldset class="mb-3">
-                                <legend style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #007bff;">
+                                <legend style="font-size: 1.3rem; font-weight: 500; margin-bottom: 1.5rem; color: #0A63C2;">
                                     ✅ Confirmación y Términos
                                 </legend>
                                 <div class="checkbox-group">
@@ -616,7 +618,7 @@
                             </fieldset>
                             
                             <!-- Verificación final -->
-                            <div class="mb-4 p-3" style="background: #f8f9fa; border-radius: 8px; border-left: 4px solid #007bff;">
+                            <div class="mb-4 p-3" style="background: #f8f9fa; border-radius: 8px; border-left: 4px solid #0A63C2;">
                                 <div style="font-weight: 500; margin-bottom: 0.5rem;">
                                     ⚠️ Verificación final
                                 </div>
