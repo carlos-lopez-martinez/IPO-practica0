@@ -95,6 +95,11 @@
         .cart-item-details {
             flex: 1;
         }
+
+        .btn-outline-danger {
+            border-color: #980F0F   ;
+            color: #980F0F;
+        }
         
         .quantity-controls {
             display: flex;
@@ -200,6 +205,7 @@
 
 <body>
     <!-- PROBLEMA: Falta skip links -->
+    <a href="#productsGrid" class="visually-hidden-focusable">Saltar al contenido principal</a>
     
     <!-- Header de la tienda -->
     <header class="shop-header">
@@ -212,10 +218,10 @@
                 
                 <!-- PROBLEMA: Carrito sin información accesible -->
                 <div style="position: relative;" aria-label="Carrito de compras">
-                    <button onclick="toggleCart()" class="btn btn-light btn-lg">
+                    <button onclick="toggleCart()" class="btn btn-light btn-lg" id="openCartBtn" aria-label="Abrir carrito de compras">
                         🛒 Carrito
                         <!-- PROBLEMA: Badge sin descripción -->
-                        <span id="cartBadge" class="cart-badge" style="display: none;" aria-label="Artículos en el carrito">0</span>
+                        <span id="cartBadge" class="cart-badge" style="display: none;" aria-label="Artículos en el carrito" aria-live="polite">0</span>
                     </button>
                 </div>
             </div>
@@ -295,7 +301,8 @@
                     <span class="visually-hidden" id="ratingDesc1">Calificación: 5 de 5 estrellas</span>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">€1,299.99</span>
+                        <span class="price" aria-describedby="price1">€1,299.99</span>
+                        <span class="visually-hidden" id="price1">El precio es de mil doscientos noventa y nueve euros con noventa y nueve céntimos</span>
                         <!-- PROBLEMA: Stock sin información accesible -->
                         <span class="stock-info stock-ok" aria-describedby="stockDesc1">✅ En stock (12 unidades)</span>
                         <span class="visually-hidden" id="stockDesc1">Stock: 12 unidades disponibles</span>
@@ -352,7 +359,8 @@
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">€899.99</span>
+                        <span class="price" aria-describedby="priceDesc2">€899.99</span>
+                        <span class="visually-hidden" id="priceDesc2">El precio es de ochocientos noventa y nueve euros con noventa y nueve céntimos</span>
                         <span class="stock-info stock-low" aria-describedby="stockDesc2">⚠️ Pocas unidades (3 restantes)</span>
                         <span class="visually-hidden" id="stockDesc2">Stock: 3 unidades disponibles</span>
                     </div>
@@ -403,7 +411,8 @@
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">€199.99</span>
+                        <span class="price" aria-describedby="priceDesc3">€199.99</span>
+                        <span class="visually-hidden" id="priceDesc3">El precio es de ciento noventa y nueve euros con noventa y nueve céntimos</span>
                         <span class="stock-info stock-ok" aria-describedby="stockDesc3">✅ En stock (25 unidades)</span>
                         <span class="visually-hidden" id="stockDesc3">Stock: 25 unidades disponibles</span>
                     </div>
@@ -456,7 +465,8 @@
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">€149.99</span>
+                        <span class="price" aria-describedby="priceDesc4">€149.99</span>
+                        <span class="visually-hidden" id="priceDesc4">El precio es de ciento cuarenta y nueve euros con noventa y nueve céntimos</span>
                         <!-- PROBLEMA: Estado agotado sin información accesible -->
                         <span class="stock-info stock-out" aria-describedby="stockDesc4">❌ Agotado</span>
                         <span class="visually-hidden" id="stockDesc4">Stock: Agotado</span>
@@ -502,7 +512,8 @@
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">€129.99</span>
+                        <span class="price" aria-describedby="priceDesc5">€129.99</span>
+                        <span class="visually-hidden" id="priceDesc5">El precio es de ciento veintinueve euros con noventa y nueve céntimos</span>
                         <span class="stock-info stock-ok" aria-describedby="stockDesc5">✅ En stock (18 unidades)</span>
                         <span class="visually-hidden" id="stockDesc5">Stock: 18 unidades disponibles</span>
                     </div>
@@ -554,7 +565,8 @@
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="price">€79.99</span>
+                        <span class="price" aria-describedby="priceDesc6">€79.99</span>
+                        <span class="visually-hidden" id="priceDesc6">El precio es de setenta y nueve euros con noventa y nueve céntimos</span>
                         <span class="stock-info stock-low" aria-describedby="stockDesc6">⚠️ Últimas unidades (2 restantes)</span>
                         <span class="visually-hidden" id="stockDesc6">Stock: 2 unidades disponibles corre que se agotan rápido</span>
                     </div>
@@ -590,12 +602,14 @@
             <div style="font-size: 1.2rem; font-weight: 500;">No se encontraron productos</div>
             <div>Intenta con otros términos de búsqueda o filtros</div>
         </div>
+
+        
     </div>
     
     <!-- PROBLEMA: Carrito lateral sin accesibilidad -->
     <div class="cart-overlay" onclick="toggleCart()" aria-label="Mostrar cesta de la compra"></div>
     
-    <div class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true">
+    <div class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-hidden="true">
         <!-- PROBLEMA: Header sin estructura -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 2px solid #e9ecef; padding-bottom: 1rem;">
             <div style="font-size: 1.5rem; font-weight: bold;" role="heading" aria-level="2">
@@ -697,6 +711,7 @@
             button.textContent = 'Añadiendo...';
             showNotification(`Añadiendo ${productName} al carrito...`, 'info');
             button.disabled = true;
+            button.setAttribute('aria-busy', 'true');
 
 
             
@@ -728,7 +743,8 @@
                 button.classList.remove('loading-product');
                 button.textContent = 'Añadir al carrito';
                 button.disabled = false;
-                
+                button.setAttribute('aria-busy', 'false');
+
                 setTimeout(() => {
                     button.classList.remove('success-animation');
                 }, 600);
@@ -791,7 +807,7 @@
                         <div class="cart-item-details">
                             <div style="font-weight: 500;" role="heading" aria-level="3">${item.name}</div>
                             <div style="color: #6c757d; font-size: 0.9rem;" aria-describedby="item-price-${item.id}">€${item.price.toFixed(2)} c/u</div>
-                            <span class=visually-hidden id="item-total-${item.id}">Total por este producto: €${(item.price * item.quantity).toFixed(2)}</span>
+                            <span class=visually-hidden id="item-price-${item.id}">Total por este producto: €${(item.price * item.quantity).toFixed(2)}</span>
                             
                         </div>
                         <div class="quantity-controls">
@@ -872,29 +888,42 @@
         function toggleCart() {
             const cartSidebar = document.getElementById('cartSidebar');
             const cartOverlay = document.querySelector('.cart-overlay');
-            
+            const mainContent = document.querySelector('[role="main"]'); // Contenido principal que se bloquea
+            const openCartBtn = document.getElementById('openCartBtn'); // Botón que abre el carrito
             isCartOpen = !isCartOpen;
-            
             if (isCartOpen) {
+                // Abrir carrito y overlay
                 cartSidebar.classList.add('open');
                 cartOverlay.classList.add('show');
+
+                // Bloquear navegación del contenido de fondo
+                mainContent.setAttribute('inert', '');
                 
-                // PROBLEMA: No mueve el foco al carrito
-                cartSidebar.setAttribute('tabindex', '-1');
-                cartSidebar.focus();
-                // PROBLEMA: No bloquea navegación con teclado en contenido de fondo
-                cartOverlay.setAttribute('aria-hidden', 'false');
-                cartOverlay.focus();
+                // Mover focus al primer elemento interactivo dentro del carrito
+                const firstFocusable = cartSidebar.querySelector('button, [href], input, select, textarea');
+                if (firstFocusable) firstFocusable.focus();
+                
+                // Marcar carrito como visible para accesibilidad
+                cartSidebar.setAttribute('aria-hidden', 'false');
+
             } else {
+                // Cerrar carrito y overlay
                 cartSidebar.classList.remove('open');
                 cartOverlay.classList.remove('show');
-                
-                // PROBLEMA: No restaura el foco al botón que abrió el carrito
-                cartSidebar.removeAttribute('tabindex');
-                cartOverlay.setAttribute('aria-hidden', 'true');
-                cartOverlay.blur();
-            }
+
+                // Restaurar navegación del contenido de fondo
+                mainContent.removeAttribute('inert');
+
+                // Restaurar focus al botón que abrió el carrito
+                openCartBtn.focus();
+
+                // Marcar carrito como oculto para accesibilidad
+                cartSidebar.setAttribute('aria-hidden', 'true');
+            
+            
+            
         }
+    }
         
         // PROBLEMA: Notificaciones no accesibles
         function showNotification(message, type = 'info') {
@@ -904,7 +933,7 @@
             
             notification.innerHTML = `
                 ${message}
-                <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
+                <button type="button" class="btn-close" onclick="this.parentElement.remove()" aria-label="Cerrar notificación"></button>
             `;
             
             document.getElementById('notifications').appendChild(notification);
@@ -941,6 +970,7 @@
             if (visibleCount === 0 && searchTerm !== '') {
                 noProductsMessage.style.display = 'block';
                 noProductsMessage.setAttribute('aria-live', 'assertive');
+                showNotification('No se encontraron productos que coincidan con la búsqueda', 'warning');
             } else {
                 noProductsMessage.style.display = 'none';
                 noProductsMessage.removeAttribute('aria-live');
@@ -972,7 +1002,7 @@
             
             // PROBLEMA: Cambio de orden no anunciado
             products.forEach(product => grid.appendChild(product));
-            showNotification(`Productos ordenados por ${sortBy}`, 'info');
+            showNotification(`Productos ordenados por: ${sortBy || 'Defecto'}`, 'info');
         }
         
         // PROBLEMA: Filtro por categoría sin feedback
@@ -1001,6 +1031,8 @@
             const isFavorite = button.textContent === '❤️';
             
             button.textContent = isFavorite ? '🤍' : '❤️';
+            button.setAttribute('aria-label', isFavorite ? `Eliminar ${productId} de favoritos` : `Agregar ${productId} a favoritos`);
+            button.setAttribute('aria-pressed', !isFavorite);
             
             // PROBLEMA: Cambio de estado no anunciado
             showNotification(
@@ -1027,6 +1059,7 @@
                 updateCartUI();
                 showNotification('Carrito vaciado', 'info');
             }
+            toggleCart();   
         }
         
         function proceedToCheckout() {
@@ -1040,6 +1073,7 @@
         // Inicialización - PROBLEMA: Sin navegación con teclado
         document.addEventListener('DOMContentLoaded', function() {
             console.log('TechShop cargado');
+            showNotification('Bienvenido a TechShop', 'success');
             
             // PROBLEMA: No configura navegación accesible con teclado
             const focusableElements = cartSidebar.querySelectorAll('button, [href], input, select, textarea');
