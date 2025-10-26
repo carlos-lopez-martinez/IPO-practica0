@@ -593,9 +593,9 @@
     </div>
     
     <!-- PROBLEMA: Carrito lateral sin accesibilidad -->
-    <div class="cart-overlay" onclick="toggleCart()" aria-hidden="true" role="dialog"></div>
+    <div class="cart-overlay" onclick="toggleCart()" aria-label="Mostrar cesta de la compra"></div>
     
-    <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true">
         <!-- PROBLEMA: Header sin estructura -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 2px solid #e9ecef; padding-bottom: 1rem;">
             <div style="font-size: 1.5rem; font-weight: bold;" role="heading" aria-level="2">
@@ -695,9 +695,10 @@
             // PROBLEMA: Loading state no accesible
             button.classList.add('loading-product');
             button.textContent = 'Añadiendo...';
+            showNotification(`Añadiendo ${productName} al carrito...`, 'info');
             button.disabled = true;
 
-            
+
             
             // Simular delay de red
             setTimeout(() => {
@@ -721,6 +722,8 @@
                 
                 // PROBLEMA: Animación sin alternativa para usuarios con vestibular disorders
                 button.classList.add('success-animation');
+                button.setAttribute('aria-live', 'polite');
+                button.setAttribute('aria-label', `Añadido ${productName} al carrito`);
                 
                 button.classList.remove('loading-product');
                 button.textContent = 'Añadir al carrito';
@@ -731,6 +734,16 @@
                 }, 600);
                 
             }, 800);
+        }
+
+        function generarEmptyCard()
+        {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = `<div id="emptyCartMessage" style="text-align: center; padding: 2rem; color: #6c757d;" aria-live="polite">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🛒</div>
+                <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">Tu carrito está vacío</div>
+                <div>¡Añade algunos productos para comenzar!</div>
+            </div>`;
         }
         
         // PROBLEMA: Actualizar UI sin accesibilidad
@@ -747,34 +760,47 @@
             if (totalItems > 0) {
                 cartBadge.style.display = 'flex';
                 cartBadge.textContent = totalItems;
+                cartBadge.setAttribute('aria-label', `Tienes ${totalItems} artículos en tu carrito`);
             } else {
                 cartBadge.style.display = 'none';
+                cartBadge.removeAttribute('aria-label');
             }
+
             
+           
+
             // PROBLEMA: Generación dinámica sin accesibilidad
             if (cartItems.length === 0) {
+                if (!emptyMessage) {
+                    emptyMessage = generarEmptyCard();
+                }
                 emptyMessage.style.display = 'block';
                 summarySection.style.display = 'none';
                 cartItemsContainer.innerHTML = emptyMessage.outerHTML;
+                cartItemsContainer.setAttribute('aria-live', 'polite');
+                cartItemsContainer.setAttribute('aria-label', 'No hay productos en el carrito');
             } else {
-                emptyMessage.style.display = 'none';
                 summarySection.style.display = 'block';
                 
                 // PROBLEMA: HTML generado dinámicamente sin estructura accesible
                 const itemsHTML = cartItems.map(item => `
-                    <div class="cart-item">
+                    <div class="cart-item" role="listitem">
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23e9ecef'/%3E%3C/svg%3E" 
-                             class="cart-item-image">
+                             class="cart-item-image"
+                             alt="${item.name}">
                         <div class="cart-item-details">
-                            <div style="font-weight: 500;">${item.name}</div>
-                            <div style="color: #6c757d; font-size: 0.9rem;">€${item.price.toFixed(2)} c/u</div>
+                            <div style="font-weight: 500;" role="heading" aria-level="3">${item.name}</div>
+                            <div style="color: #6c757d; font-size: 0.9rem;" aria-describedby="item-price-${item.id}">€${item.price.toFixed(2)} c/u</div>
+                            <span class=visually-hidden id="item-total-${item.id}">Total por este producto: €${(item.price * item.quantity).toFixed(2)}</span>
+                            
                         </div>
                         <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="updateCartItemQuantity('${item.id}', ${item.quantity - 1})">-</button>
-                            <input type="text" class="quantity-input" value="${item.quantity}" readonly>
-                            <button class="quantity-btn" onclick="updateCartItemQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                            <button class="quantity-btn" onclick="updateCartItemQuantity('${item.id}', ${item.quantity - 1})" aria-label="Reducir cantidad de ${item.name}">-</button>
+                            <label for="quantity-input-${item.id}" class="visually-hidden">Cantidad de ${item.name} en el carrito</label>
+                            <input type="text" class="quantity-input" id="quantity-input-${item.id}" value="${item.quantity}" readonly>
+                            <button class="quantity-btn" onclick="updateCartItemQuantity('${item.id}', ${item.quantity + 1})" aria-label="Aumentar cantidad de ${item.name}">+</button>
                         </div>
-                        <button onclick="removeFromCart('${item.id}')" style="background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1.2rem;">🗑️</button>
+                        <button onclick="removeFromCart('${item.id}')" aria-label="Eliminar ${item.name} del carrito" style="background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1.2rem;">🗑️</button>
                     </div>
                 `).join('');
                 
@@ -784,7 +810,11 @@
                 const shipping = subtotal > 50 ? 0 : 9.99;
                 const taxes = subtotal * 0.21;
                 const total = subtotal + shipping + taxes;
-                
+                showNotification(`Carrito actualizado. Total: €${total.toFixed(2)}`, 'info');
+                showNotification(`Carrito actualizado. Subtotal: €${subtotal.toFixed(2)}`, 'info');
+                showNotification(`Carrito actualizado. Envío: €${shipping.toFixed(2)}`, 'info');
+                showNotification(`Carrito actualizado. Impuestos: €${taxes.toFixed(2)}`, 'info');
+
                 document.getElementById('subtotal').textContent = `€${subtotal.toFixed(2)}`;
                 document.getElementById('shipping').textContent = shipping === 0 ? 'Gratis' : `€${shipping.toFixed(2)}`;
                 document.getElementById('taxes').textContent = `€${taxes.toFixed(2)}`;
@@ -795,6 +825,8 @@
         // PROBLEMA: Actualizar cantidad sin feedback accesible
         function updateCartItemQuantity(productId, newQuantity) {
             if (newQuantity <= 0) {
+                const item = cartItems.find(item => item.id === productId);
+                showNotification(`Eliminando ${item.name} del carrito`, 'info');
                 removeFromCart(productId);
                 return;
             }
@@ -806,11 +838,14 @@
                 
                 // PROBLEMA: Cambio no anunciado
                 updateCartUI();
+                showNotification(`Cantidad de ${item.name} actualizada a ${newQuantity}`, 'success');
                 
                 // PROBLEMA: No indica qué cambió específicamente
                 if (newQuantity > oldQuantity) {
+                    showNotification(`Cantidad aumentada para ${item.name}`, 'info');
                     console.log(`Cantidad aumentada para ${item.name}`);
                 } else {
+                    showNotification(`Cantidad reducida para ${item.name}`, 'info');
                     console.log(`Cantidad reducida para ${item.name}`);
                 }
             }
@@ -828,6 +863,8 @@
                 showNotification(`${removedItem.name} eliminado del carrito`, 'info');
                 
                 // PROBLEMA: No enfoca elemento apropiado después de eliminar
+                const cartItemsContainer = document.getElementById('cartItems');
+                cartItemsContainer.focus();
             }
         }
         
@@ -843,12 +880,19 @@
                 cartOverlay.classList.add('show');
                 
                 // PROBLEMA: No mueve el foco al carrito
+                cartSidebar.setAttribute('tabindex', '-1');
+                cartSidebar.focus();
                 // PROBLEMA: No bloquea navegación con teclado en contenido de fondo
+                cartOverlay.setAttribute('aria-hidden', 'false');
+                cartOverlay.focus();
             } else {
                 cartSidebar.classList.remove('open');
                 cartOverlay.classList.remove('show');
                 
                 // PROBLEMA: No restaura el foco al botón que abrió el carrito
+                cartSidebar.removeAttribute('tabindex');
+                cartOverlay.setAttribute('aria-hidden', 'true');
+                cartOverlay.blur();
             }
         }
         
@@ -896,8 +940,10 @@
             const noProductsMessage = document.getElementById('noProductsMessage');
             if (visibleCount === 0 && searchTerm !== '') {
                 noProductsMessage.style.display = 'block';
+                noProductsMessage.setAttribute('aria-live', 'assertive');
             } else {
                 noProductsMessage.style.display = 'none';
+                noProductsMessage.removeAttribute('aria-live');
             }
         }
         
@@ -926,6 +972,7 @@
             
             // PROBLEMA: Cambio de orden no anunciado
             products.forEach(product => grid.appendChild(product));
+            showNotification(`Productos ordenados por ${sortBy}`, 'info');
         }
         
         // PROBLEMA: Filtro por categoría sin feedback
@@ -939,11 +986,14 @@
                     product.style.display = 'none';
                 }
             });
+            showNotification(`Filtrando por categoría: ${category || 'Todas'}`, 'info');
         }
         
         // PROBLEMA: Funciones adicionales sin accesibilidad
         function updateQuantitySelection(productId, quantity) {
             selectedQuantities[productId] = parseInt(quantity);
+
+            showNotification(`Cantidad seleccionada para ${productId} actualizada a ${quantity}`, 'info');
         }
         
         function toggleFavorite(productId) {
@@ -964,6 +1014,9 @@
             const email = prompt('Ingresa tu email para notificarte cuando esté disponible:');
             if (email) {
                 showNotification('Te notificaremos cuando el producto esté disponible', 'success');
+            }
+            else {
+                showNotification('Notificación cancelada', 'info');
             }
         }
         
@@ -989,8 +1042,42 @@
             console.log('TechShop cargado');
             
             // PROBLEMA: No configura navegación accesible con teclado
+            const focusableElements = cartSidebar.querySelectorAll('button, [href], input, select, textarea');
+            focusableElements.forEach(el => {
+                el.setAttribute('tabindex', '0');
+            });
             // FALTA: Manejo de teclas Escape, Enter, flechas
+            cartSidebar.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    toggleCart();
+                }
+                else if (event.key === 'Enter') {
+                    event.target.click();
+                }
+                else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    const index = Array.from(focusableElements).indexOf(event.target);
+                    const prevIndex = (index - 1 + focusableElements.length) % focusableElements.length;
+                    focusableElements[prevIndex].focus();
+                }
+                else if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    const index = Array.from(focusableElements).indexOf(event.target);
+                    const nextIndex = (index + 1) % focusableElements.length;
+                    focusableElements[nextIndex].focus();
+                }
+            });
+
             // FALTA: Indicadores de foco apropiados
+            focusableElements.forEach(el => {
+                el.addEventListener('focus', () => {
+                    el.style.outline = '2px solid #002696';
+                    el.style.outlineOffset = '2px';
+                });
+                el.addEventListener('blur', () => {
+                    el.style.outline = 'none';
+                });
+            });
         });
 
 
