@@ -339,41 +339,42 @@
                         <!-- Salario esperado -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <div class="form-label">Salario esperado (EUR/año)</div>
-                                <input type="number" 
+                                <label id="label-salario" for="form-salario" class="form-label">Salario esperado (EUR/año)</label>
+                                <input type="number"
+                                       id="form-salario" 
                                        class="form-control" 
                                        name="expectedSalary"
                                        min="15000" 
                                        max="150000" 
                                        step="1000"
-                                       placeholder="45000">
+                                       placeholder="45000"
+                                       aria-labelledby="label-salario">
                                 <div class="field-help">Rango entre €15,000 y €150,000</div>
                             </div>
                             
                             <!-- Disponibilidad -->
-                            <div class="col-md-6 mb-3">
-                                <div class="form-label required-field">Disponibilidad para trabajar</div>
+                            <fieldset class="col-md-6 mb-3">
+                                <legend class="form-label required-field">Disponibilidad para trabajar</legend>
                                 <!-- PROBLEMA: Radio buttons sin fieldset -->
                                 <div class="radio-group">
                                     <div>
-                                        <!-- PROBLEMA: Radio buttons sin labels apropiados -->
-                                        <input type="radio" name="availability" value="immediate" style="margin-right: 0.5rem;">
+                                        <input type="radio" name="availability" value="immediate" aria-label="Disponibilidad inmediata" style="margin-right: 0.5rem;">
                                         Inmediata
                                     </div>
                                     <div>
-                                        <input type="radio" name="availability" value="2weeks" style="margin-right: 0.5rem;">
+                                        <input type="radio" name="availability" value="2weeks" aria-label="Disponibilidad en dos semanas" style="margin-right: 0.5rem;">
                                         2 semanas
                                     </div>
                                     <div>
-                                        <input type="radio" name="availability" value="1month" style="margin-right: 0.5rem;">
+                                        <input type="radio" name="availability" value="1month" aria-label="Disponibilidad en un mes" style="margin-right: 0.5rem;">
                                         1 mes
                                     </div>
                                     <div>
-                                        <input type="radio" name="availability" value="negotiable" style="margin-right: 0.5rem;">
+                                        <input type="radio" name="availability" value="negotiable" aria-label="Disponibilidad negociable" style="margin-right: 0.5rem;">
                                         Negociable
                                     </div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
                     </div>
                     
@@ -386,8 +387,8 @@
                         <div class="row">
                             <!-- Idioma preferido -->
                             <div class="col-md-4 mb-3">
-                                <div class="form-label">Idioma preferido</div>
-                                <select class="form-select" name="preferredLanguage">
+                                <label id="label-idioma" for="form-idioma" class="form-label">Idioma preferido</label>
+                                <select id="form-idioma" aria-labelledby="label-idioma" class="form-select" name="preferredLanguage">
                                     <option value="es" selected>Español</option>
                                     <option value="en">English</option>
                                     <option value="fr">Français</option>
@@ -398,8 +399,8 @@
                             
                             <!-- Zona horaria -->
                             <div class="col-md-4 mb-3">
-                                <div class="form-label">Zona horaria</div>
-                                <select class="form-select" name="timezone">
+                                <label id="label-zonahoraria" for="form-zonahoraria" class="form-label">Zona horaria</label>
+                                <select class="form-select" name="timezone" id="form-zonahoraria" aria-labelledby="label-zonahoraria">
                                     <option value="">Detectar automáticamente</option>
                                     <option value="Europe/Madrid">Europa/Madrid (CET)</option>
                                     <option value="America/Mexico_City">América/Ciudad_de_México</option>
@@ -409,42 +410,42 @@
                             </div>
                             
                             <!-- Tema preferido -->
-                            <div class="col-md-4 mb-3">
-                                <div class="form-label">Tema de interfaz</div>
+                            <fieldset class="col-md-4 mb-3">
+                                <legend class="form-label">Tema de interfaz</legend>
                                 <!-- PROBLEMA: Radio buttons inline sin estructura -->
                                 <div style="margin-top: 0.5rem;">
-                                    <input type="radio" name="theme" value="light" checked style="margin-right: 0.5rem;">
+                                    <input type="radio" name="theme" value="light" checked aria-label="Tema claro" style="margin-right: 0.5rem;">
                                     Claro
-                                    <input type="radio" name="theme" value="dark" style="margin-left: 1rem; margin-right: 0.5rem;">
+                                    <input type="radio" name="theme" value="dark" aria-label="Tema oscuro" style="margin-left: 1rem; margin-right: 0.5rem;">
                                     Oscuro
-                                    <input type="radio" name="theme" value="auto" style="margin-left: 1rem; margin-right: 0.5rem;">
+                                    <input type="radio" name="theme" value="auto" aria-label="Tema automático" style="margin-left: 1rem; margin-right: 0.5rem;">
                                     Automático
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
                         
                         <!-- Notificaciones - PROBLEMA: Sin fieldset -->
-                        <div class="mb-3">
-                            <div class="form-label">Preferencias de notificaciones</div>
+                        <fieldset class="mb-3">
+                            <legend class="form-label">Preferencias de notificaciones</legend>
                             <div class="checkbox-group">
                                 <div class="mb-2">
-                                    <input type="checkbox" name="notifications" value="email" checked style="margin-right: 0.5rem;">
+                                    <input type="checkbox" name="notifications" value="email" checked aria-label="Recibir notificaciones por correo electrónico" style="margin-right: 0.5rem;">
                                     Recibir notificaciones por email
                                 </div>
                                 <div class="mb-2">
-                                    <input type="checkbox" name="notifications" value="sms" style="margin-right: 0.5rem;">
+                                    <input type="checkbox" name="notifications" value="sms" aria-label="Recibir notificaciones por mensaje SMS" style="margin-right: 0.5rem;">
                                     Recibir notificaciones por SMS
                                 </div>
                                 <div class="mb-2">
-                                    <input type="checkbox" name="notifications" value="push" checked style="margin-right: 0.5rem;">
+                                    <input type="checkbox" name="notifications" value="push" checked aria-label="Recibir notificaciones automáticas tipo push" style="margin-right: 0.5rem;">
                                     Recibir notificaciones push
                                 </div>
                                 <div class="mb-2">
-                                    <input type="checkbox" name="notifications" value="newsletter" checked style="margin-right: 0.5rem;">
+                                    <input type="checkbox" name="notifications" value="newsletter" checked aria-label="Suscribirse al boletín semanal" style="margin-right: 0.5rem;">
                                     Suscribirse al newsletter semanal
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
                         
                         <!-- Bio/Descripción -->
                         <div class="mb-3">
