@@ -172,7 +172,8 @@
                                         placeholder="Ingresa tu nombre completo"
                                         maxlength="100"
                                         aria-labelledby="label-fullName"
-                                        aria-describedby="fullName-help">
+                                        aria-describedby="fullName-help"
+                                        aria-required="true">
                                     <div class="character-counter">0/100 caracteres</div>
                                     <!-- PROBLEMA: Mensaje de ayuda no asociado -->
                                     <div id="fullName-help" class="field-help">
@@ -189,7 +190,8 @@
                                         name="email"
                                         placeholder="tu@email.com"
                                         autocomplete="email"
-                                        aria-labelledby="label-email">
+                                        aria-labelledby="label-email"
+                                        aria-required="true">
                                     <!-- PROBLEMA: Validación en vivo sin accesibilidad -->
                                     <div class="validation-message" style="display: none;"></div>
                                 </div>
@@ -205,7 +207,8 @@
                                         name="birthDate"
                                         max="2006-01-01"
                                         aria-labelledby="label-fechanacimiento"
-                                        aria-describedby="fechanacimiento-help">
+                                        aria-describedby="fechanacimiento-help"
+                                        aria-required="true">
                                     <div id="fechanacimiento-help" class="field-help">
                                         Debes ser mayor de 18 años para registrarte
                                     </div>
@@ -220,7 +223,8 @@
                                         name="phone"
                                         placeholder="+34 600 000 000"
                                         autocomplete="tel"
-                                        aria-labelledby="label-tlf">
+                                        aria-labelledby="label-tlf"
+                                        aria-required="true">
                                     <div class="validation-message" style="display: none;"></div>
                                 </div>
                                 
@@ -228,9 +232,9 @@
                                 <div class="col-md-4 mb-3">
                                     <!-- PROBLEMA: Select sin label apropiado -->
                                     <label for="pais" id="label-select" class="form-label required-field">País</label>
-                                    <select id="pais" class="form-select" name="country" aria-labelledby="label-select">
+                                    <select id="pais" class="form-select" name="country" aria-labelledby="label-select" aria-required="true">
                                         <!-- PROBLEMA: Opción por defecto no accesible -->
-                                        <option value="">Selecciona tu país</option>
+                                        <option value="" disabled selected hidden>Selecciona tu país</option>
                                         <option value="ES">España</option>
                                         <option value="MX">México</option>
                                         <option value="AR">Argentina</option>
@@ -259,7 +263,8 @@
                                         name="occupation"
                                         placeholder="Ej: Desarrollador Frontend"
                                         list="occupationsList"
-                                        aria-labelledby="label-ocupacion">
+                                        aria-labelledby="label-ocupacion"
+                                        aria-describedby="datalist-help">
                                     
                                     <!-- PROBLEMA: Datalist sin accesibilidad -->
                                     <datalist id="occupationsList">
@@ -272,6 +277,17 @@
                                         <option value="Data Scientist">
                                         <option value="Estudiante">
                                     </datalist>
+                                    <small id="datalist-help" hidden>
+                                        Lista de ocupaciones predefinidas:
+                                            - Desarrollador Frontend
+                                            - Desarrollador Backend
+                                            - Full Stack Developer
+                                            - DevOps Engineer
+                                            - UX/UI Designer
+                                            - Product Manager
+                                            - Data Scientist
+                                            - Estudiante
+                                    </small>
                                 </div>
                                 
                                 <!-- Experiencia -->
