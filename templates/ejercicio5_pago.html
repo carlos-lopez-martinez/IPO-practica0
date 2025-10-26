@@ -471,16 +471,18 @@
                                                    name="sameAsShipping" 
                                                    checked 
                                                    onchange="toggleBillingAddress()"
-                                                   style="margin-right: 0.5rem;">
-                                            <span>La dirección de facturación es igual a la de envío</span>
+                                                   style="margin-right: 0.5rem;"
+                                                   aria-label="Checkbox de facturación"
+                                                   aria-describedby="facturacion-help">
+                                            <span id="facturacion-help">La dirección de facturación es igual a la de envío</span>
                                         </div>
                                         
                                         <!-- PROBLEMA: Sección colapsable sin accesibilidad -->
                                         <div id="billingAddressSection" style="display: none;">
                                             <div class="row">
                                                 <div class="col-12 mb-3">
-                                                    <div class="form-label">Dirección de facturación</div>
-                                                    <input type="text" class="form-control" name="billingAddress">
+                                                    <label id="label-direccion-facturacion" for="form-direccion-facturacion" class="form-label">Dirección de facturación</label>
+                                                    <input type="text" class="form-control" name="billingAddress" id="form-direccion-facturacion" aria-labelledby="label-direccion-facturacion">
                                                 </div>
                                             </div>
                                             <!-- Más campos de facturación... -->
@@ -491,24 +493,34 @@
                                     <div style="display: flex; justify-content: space-between;">
                                         <button type="button" 
                                                 onclick="prevStep()"
-                                                class="btn btn-outline-secondary btn-lg">
+                                                class="btn btn-outline-secondary btn-lg"
+                                                aria-describedby="descripcion-btn-anterior-help"
+                                                aria-label="Boton atrás">
                                             ← Anterior
                                         </button>
+                                        <small id="descripcion-btn-anterior-help" aria-hidden> 
+                                            Botón para ir al paso anterior del formulario
+                                        </small>
                                         <button type="button" 
                                                 onclick="nextStep()"
-                                                class="btn btn-primary btn-lg">
+                                                class="btn btn-primary btn-lg"
+                                                aria-describedby="descripcion-btn-adelante-help"
+                                                aria-label="Boton siguiente">
                                             Continuar →
                                         </button>
+                                        <small id="descripcion-btn-adelante-help" aria-hidden> 
+                                            Botón para ir al paso siguiente del formulario
+                                        </small>
                                     </div>
                                 </div>
                                 
                                 <!-- PASO 3: Método de Pago - PROBLEMAS CRÍTICOS -->
                                 <div class="step-panel" data-panel="3">
                                     
-                                    <div class="form-section">
-                                        <div class="section-title">
+                                    <fieldset class="form-section">
+                                        <legend class="section-title">
                                             💳 Método de Pago
-                                        </div>
+                                        </legend>
                                         
                                         <!-- PROBLEMA: Métodos de pago sin fieldset -->
                                         <div style="margin-bottom: 2rem;">
@@ -516,8 +528,8 @@
                                             <!-- Tarjeta de crédito -->
                                             <div class="payment-method" onclick="selectPaymentMethod('card')">
                                                 <!-- PROBLEMA: Radio sin label -->
-                                                <input type="radio" name="paymentMethod" value="card" style="margin-right: 0.5rem;">
-                                                <strong>💳 Tarjeta de Crédito/Débito</strong>
+                                                <input type="radio" name="paymentMethod" value="card" style="margin-right: 0.5rem;" aria-label="Tarjeta" aria-describedby="tarjeta-credit-debit-help">
+                                                <strong id="tarjeta-credit-debit-help">💳 Tarjeta de Crédito/Débito</strong>
                                                 <div style="font-size: 0.9rem; color: #64696D;">
                                                     Visa, Mastercard, American Express
                                                 </div>
@@ -525,8 +537,9 @@
                                             
                                             <!-- PayPal -->
                                             <div class="payment-method" onclick="selectPaymentMethod('paypal')">
-                                                <input type="radio" name="paymentMethod" value="paypal" style="margin-right: 0.5rem;">
+                                                <input type="radio" name="paymentMethod" value="paypal" style="margin-right: 0.5rem;" aria-label="Paypal" aria-describedby="paypal-help">
                                                 <strong>🔵 PayPal</strong>
+                                                <small id="paypal-help" aria-hidden> Opción de Paypal, paga de fomra segura con tu cuenta en Paypal </small>
                                                 <div style="font-size: 0.9rem; color: #64696D;">
                                                     Paga de forma segura con tu cuenta PayPal
                                                 </div>
@@ -534,8 +547,9 @@
                                             
                                             <!-- Transferencia -->
                                             <div class="payment-method" onclick="selectPaymentMethod('transfer')">
-                                                <input type="radio" name="paymentMethod" value="transfer" style="margin-right: 0.5rem;">
+                                                <input type="radio" name="paymentMethod" value="transfer" style="margin-right: 0.5rem;" aria-label="Transferencia Bancaria" aria-describedby="transferencia-help">
                                                 <strong>🏦 Transferencia Bancaria</strong>
+                                                <small id="transferencia-help" aria-hidden> Opción de transferencia Bancaria, recibirás las instrucciones por email </small>
                                                 <div style="font-size: 0.9rem; color: #64696D;">
                                                     Recibirás las instrucciones por email
                                                 </div>
@@ -663,7 +677,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </fieldset>
                                     
                                     <!-- Botones de navegación -->
                                     <div style="display: flex; justify-content: space-between;">
