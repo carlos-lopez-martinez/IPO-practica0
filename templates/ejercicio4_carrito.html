@@ -10,6 +10,60 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
+
+        /* Modal de información - oculto por defecto */
+.modal-info {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Modal visible con animación */
+.modal-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+/* Modal ocultándose con animación */
+.modal-close {
+    opacity: 0;
+}
+
+/* Contenido del modal */
+.modal-info .modal-content {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    max-height: 250px;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+/* Animación del contenido cuando se muestra */
+.modal-info.modal-show .modal-content {
+    transform: scale(1);
+}
+
+/* Animación del contenido cuando se cierra */
+.modal-info.modal-close .modal-content {
+    transform: scale(0.9);
+}
         .shop-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -204,11 +258,13 @@
 </head>
 
 <body>
-    <!-- PROBLEMA: Falta skip links -->
-    <a href="#productsGrid" class="visually-hidden-focusable">Saltar al contenido principal</a>
+    
     
     <!-- Header de la tienda -->
-    <header class="shop-header">
+    <header class="shop-header" id="header">
+
+        <!-- PROBLEMA: Falta skip links -->
+    <a href="#productsGrid" class="visually-hidden-focusable">Saltar al contenido principal</a>
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -236,7 +292,7 @@
     </header>
     
     <!-- Contenido principal -->
-    <div class="container my-5" role="main">
+    <div class="container my-5" role="main" id="main">
         
         <!-- Filtros y búsqueda - PROBLEMAS -->
         <div class="row mb-4">
@@ -603,7 +659,26 @@
             <div>Intenta con otros términos de búsqueda o filtros</div>
         </div>
 
+
+
         
+    </div>
+
+    <!-- MODAL DE INFORMACIÓN -->
+    <div id="infoModal" class="modal-info" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" role="heading" aria-level="2">Información</h2>
+                <button class="btn-close" onclick="cerrarInfoModal()" aria-label="Cerrar modal de información" id="cerrarModalInfo"></button>
+            </div>
+            <div class="modal-body">
+                <p id="infoModalMessage">Este es un mensaje informativo.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="infoModalButton1" >Aceptar</button>
+                <button class="btn btn-primary" id="infoModalButton2" >Rechazar</button>
+            </div>
+        </div>
     </div>
     
     <!-- PROBLEMA: Carrito lateral sin accesibilidad -->
@@ -625,12 +700,14 @@
         
         <!-- Lista de productos en el carrito - PROBLEMAS -->
         <div id="cartItems" role="list">
-            <!-- PROBLEMA: Mensaje de carrito vacío sin role apropiado -->
-            <div id="emptyCartMessage" style="text-align: center; padding: 2rem; color: #6c757d;" aria-live="polite">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🛒</div>
-                <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">Tu carrito está vacío</div>
-                <div>¡Añade algunos productos para comenzar!</div>
-            </div>
+            
+        </div>
+
+        <!-- PROBLEMA: Mensaje de carrito vacío sin role apropiado -->
+        <div id="emptyCartMessage" style="text-align: center; padding: 2rem; color: #6c757d;" aria-live="polite">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🛒</div>
+            <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">Tu carrito está vacío</div>
+            <div>¡Añade algunos productos para comenzar!</div>
         </div>
         
         <!-- Resumen del carrito - PROBLEMAS -->
@@ -700,6 +777,106 @@
         let cartTotal = 0;
         let isCartOpen = false;
         let selectedQuantities = {};
+        let seccionStates = {
+            "main": true,
+            "cartSidebar": false,
+            "infoModal": false,
+            "header": true
+        }
+
+        let estadoAnterior = {}
+
+
+        function mostrarModalInfo(mensaje, emailRequerido=false)
+        {
+            let mensajeEl = document.getElementById("infoModalMessage")
+            let modalContainer = document.getElementById("infoModal")
+            let botonCerrarModal = document.getElementById("cerrarModalInfo")
+            let botonAceptar = document.getElementById("infoModalButton1");
+            let botonrechazar = document.getElementById("infoModalButton2");
+            
+            console.log(seccionStates)
+
+            estadoAnterior = {...seccionStates}
+
+            seccionStates.cartSidebar = false;
+            seccionStates.header = false;
+            seccionStates.main = false;
+            seccionStates.infoModal = true;
+            actualizarEstados(seccionStates);
+
+            document.activeElement.blur(); // Quitar foco del elemento activo
+
+            if (emailRequerido) {
+                mensajeEl.innerHTML = `${mensaje}<br><br><label for="emailInput">Correo electrónico:</label><input type="email" id="emailInput" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;" aria-required="true">`;
+            } else {
+                mensajeEl.innerHTML = mensaje;
+            }
+
+            // Habilitamos el modal
+            modalContainer.classList.add("modal-show");
+            botonCerrarModal.focus(); // Devolver foco al botón de cerrar
+
+            return new Promise((resolve, reject) => {
+                botonAceptar.onclick = () => {
+                    cerrarInfoModal();
+                    resolve(true);
+                };
+                botonrechazar.onclick = () => {
+                    cerrarInfoModal();
+                    resolve(false);
+                };
+            });
+        }
+
+        function cerrarInfoModal()
+        {
+            let modalContainer = document.getElementById("infoModal")
+            modalContainer.classList.remove("modal-show");
+            document.activeElement.blur(); // Quitar foco del elemento activo
+            actualizarEstados(estadoAnterior);
+            if ( estadoAnterior.header)
+            {
+                seccionStates = {
+                    "main": true,
+                    "cartSidebar": false,
+                    "infoModal": false,
+                    "header": true
+                }
+            }
+            else{
+                seccionStates = {
+                    "main": false,
+                    "cartSidebar": true,
+                    "infoModal": false,
+                    "header": false
+                }
+            }
+            estadoAnterior = {}
+            
+
+        }
+
+        function actualizarEstados(data)
+        {
+            // Deshabilitar el resto de la página para lectores de pantalla y para navegación por teclado
+            for (let [key,value] of Object.entries(data))
+            {
+                let seccion = document.getElementById(key)
+                //Si debe estar activo le damos eprmiso del lector de pantalla
+                if (value){
+                    seccion.removeAttribute("inert");
+                    seccion.setAttribute("aria-hidden","false")
+                    
+                }
+                else{
+                    // Si deberia estar quitado lo ponemos como innert y haria hidden
+                    seccion.setAttribute("inert","")
+                    seccion.setAttribute("aria-hidden","true")
+                }      
+                
+            }
+        }
         
         // PROBLEMA: Función añadir al carrito sin feedback accesible
         function addToCart(productId, productName, price) {
@@ -752,16 +929,7 @@
             }, 800);
         }
 
-        function generarEmptyCard()
-        {
-            const cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = `<div id="emptyCartMessage" style="text-align: center; padding: 2rem; color: #6c757d;" aria-live="polite">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🛒</div>
-                <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">Tu carrito está vacío</div>
-                <div>¡Añade algunos productos para comenzar!</div>
-            </div>`;
-        }
-        
+       
         // PROBLEMA: Actualizar UI sin accesibilidad
         function updateCartUI() {
             const cartBadge = document.getElementById('cartBadge');
@@ -783,20 +951,17 @@
             }
 
             
-           
 
             // PROBLEMA: Generación dinámica sin accesibilidad
             if (cartItems.length === 0) {
-                if (!emptyMessage) {
-                    emptyMessage = generarEmptyCard();
-                }
                 emptyMessage.style.display = 'block';
                 summarySection.style.display = 'none';
-                cartItemsContainer.innerHTML = emptyMessage.outerHTML;
+                cartItemsContainer.innerHTML = '';
                 cartItemsContainer.setAttribute('aria-live', 'polite');
                 cartItemsContainer.setAttribute('aria-label', 'No hay productos en el carrito');
             } else {
                 summarySection.style.display = 'block';
+                emptyMessage.style.display = 'none';
                 
                 // PROBLEMA: HTML generado dinámicamente sin estructura accesible
                 const itemsHTML = cartItems.map(item => `
@@ -868,7 +1033,11 @@
         }
         
         // PROBLEMA: Eliminar producto sin confirmación accesible
-        function removeFromCart(productId) {
+        async function removeFromCart(productId) {
+            let decision = await mostrarModalInfo("¿Estás seguro de que deseas eliminar este producto del carrito?");
+            if (!decision) {
+                return;
+            }
             const itemIndex = cartItems.findIndex(item => item.id === productId);
             
             if (itemIndex > -1) {
@@ -892,37 +1061,37 @@
             const openCartBtn = document.getElementById('openCartBtn'); // Botón que abre el carrito
             isCartOpen = !isCartOpen;
             if (isCartOpen) {
+                seccionStates.cartSidebar = true;
+                seccionStates.main = false;
+                seccionStates.header = false;
+                seccionStates.infoModal = false;
+                actualizarEstados(seccionStates);
                 // Abrir carrito y overlay
                 cartSidebar.classList.add('open');
                 cartOverlay.classList.add('show');
 
-                // Bloquear navegación del contenido de fondo
-                mainContent.setAttribute('inert', '');
                 
                 // Mover focus al primer elemento interactivo dentro del carrito
                 const firstFocusable = cartSidebar.querySelector('button, [href], input, select, textarea');
                 if (firstFocusable) firstFocusable.focus();
                 
-                // Marcar carrito como visible para accesibilidad
-                cartSidebar.setAttribute('aria-hidden', 'false');
+               
+                
 
             } else {
+                seccionStates.cartSidebar = false;
+                seccionStates.main = true;
+                seccionStates.header = true;
+                seccionStates.infoModal = false;
+                actualizarEstados(seccionStates);
                 // Cerrar carrito y overlay
                 cartSidebar.classList.remove('open');
                 cartOverlay.classList.remove('show');
 
-                // Restaurar navegación del contenido de fondo
-                mainContent.removeAttribute('inert');
-
                 // Restaurar focus al botón que abrió el carrito
                 openCartBtn.focus();
-
-                // Marcar carrito como oculto para accesibilidad
-                cartSidebar.setAttribute('aria-hidden', 'true');
+            }
             
-            
-            
-        }
     }
         
         // PROBLEMA: Notificaciones no accesibles
@@ -1041,9 +1210,9 @@
             );
         }
         
-        function notifyWhenAvailable(productId) {
+        async function notifyWhenAvailable(productId) {
             // PROBLEMA: Prompt no accesible
-            const email = prompt('Ingresa tu email para notificarte cuando esté disponible:');
+            const email = await mostrarModalInfo("El producto no está en stock. Introduce tu correo electrónico para ser notificado cuando esté disponible.", true);
             if (email) {
                 showNotification('Te notificaremos cuando el producto esté disponible', 'success');
             }
@@ -1052,14 +1221,16 @@
             }
         }
         
-        function clearCart() {
+        async function clearCart() {
             // PROBLEMA: Confirmación no accesible
-            if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+            let decision = await mostrarModalInfo("Estas seguro de que quieres vaciar el carrito")
+            if (decision) {
                 cartItems = [];
                 updateCartUI();
                 showNotification('Carrito vaciado', 'info');
+                toggleCart(); 
             }
-            toggleCart();   
+              
         }
         
         function proceedToCheckout() {
