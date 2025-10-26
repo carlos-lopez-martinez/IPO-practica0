@@ -249,12 +249,14 @@
                         <div class="row">
                             <!-- Ocupación -->
                             <div class="col-md-6 mb-3">
-                                <div class="form-label">Ocupación actual</div>
-                                <input type="text" 
+                                <label id="label-ocupacion" for="form-ocupacion" class="form-label">Ocupación actual</label>
+                                <input type="text"
+                                       id="form-ocupacion" 
                                        class="form-control" 
                                        name="occupation"
                                        placeholder="Ej: Desarrollador Frontend"
-                                       list="occupationsList">
+                                       list="occupationsList"
+                                       aria-labelledby="label-ocupacion">
                                 
                                 <!-- PROBLEMA: Datalist sin accesibilidad -->
                                 <datalist id="occupationsList">
@@ -289,50 +291,50 @@
                         </div>
                         
                         <!-- Habilidades técnicas - PROBLEMA: Checkboxes sin estructura -->
-                        <div class="mb-3">
-                            <div class="form-label">Habilidades técnicas</div>
+                        <fieldset class="mb-3">
+                            <legend class="form-label">Habilidades técnicas<legend>
                             <div class="field-help">Selecciona todas las que apliquen</div>
                             
                             <div class="checkbox-group">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <!-- PROBLEMA: Checkboxes sin labels apropiados -->
-                                        <input type="checkbox" name="skills" value="html" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="html" aria-label="Seleccionar habilidad HTML y CSS" style="margin-right: 0.5rem;">
                                         HTML/CSS
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="checkbox" name="skills" value="javascript" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="javascript" aria-label="Seleccionar habilidad JavaScript" style="margin-right: 0.5rem;">
                                         JavaScript
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="checkbox" name="skills" value="react" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="react" aria-label="Seleccionar habilidad React" style="margin-right: 0.5rem;">
                                         React
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="checkbox" name="skills" value="vue" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="vue" aria-label="Seleccionar habilidad Vue.js" style="margin-right: 0.5rem;">
                                         Vue.js
                                     </div>
-                                </div>
-                                <div class="row mt-2">
+                                    </div>
+
+                                    <div class="row mt-2">
                                     <div class="col-md-3">
-                                        <input type="checkbox" name="skills" value="angular" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="angular" aria-label="Seleccionar habilidad Angular" style="margin-right: 0.5rem;">
                                         Angular
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="checkbox" name="skills" value="nodejs" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="nodejs" aria-label="Seleccionar habilidad Node.js" style="margin-right: 0.5rem;">
                                         Node.js
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="checkbox" name="skills" value="python" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="python" aria-label="Seleccionar habilidad Python" style="margin-right: 0.5rem;">
                                         Python
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="checkbox" name="skills" value="other" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="skills" value="other" aria-label="Seleccionar otras habilidades técnicas" style="margin-right: 0.5rem;">
                                         Otras
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
                         
                         <!-- Salario esperado -->
                         <div class="row">
