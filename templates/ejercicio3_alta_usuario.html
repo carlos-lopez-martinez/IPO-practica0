@@ -163,12 +163,14 @@
                             <!-- Nombre completo -->
                             <div class="col-md-6 mb-3">
                                 <!-- PROBLEMA: Label sin asociación correcta -->
-                                <div class="form-label required-field">Nombre completo</div>
+                                <label for="text" id="label-fullName" class="form-label required-field">Nombre completo</label>
                                 <input type="text" 
+                                       id="text"
                                        class="form-control" 
                                        name="fullName"
                                        placeholder="Ingresa tu nombre completo"
-                                       maxlength="100">
+                                       maxlength="100"
+                                       aria-labelledby="label-fullName">
                                 <div class="character-counter">0/100 caracteres</div>
                                 <!-- PROBLEMA: Mensaje de ayuda no asociado -->
                                 <div class="field-help">
@@ -178,12 +180,14 @@
                             
                             <!-- Email -->
                             <div class="col-md-6 mb-3">
-                                <div class="form-label required-field">Correo electrónico</div>
+                                <label id="label-email" for="email-form" class="form-label required-field">Correo electrónico</label>
                                 <input type="email" 
+                                       id="email-form"
                                        class="form-control" 
                                        name="email"
                                        placeholder="tu@email.com"
-                                       autocomplete="email">
+                                       autocomplete="email"
+                                       aria-labelledby="label-email">
                                 <!-- PROBLEMA: Validación en vivo sin accesibilidad -->
                                 <div class="validation-message" style="display: none;"></div>
                             </div>
@@ -192,11 +196,13 @@
                         <div class="row">
                             <!-- Fecha de nacimiento -->
                             <div class="col-md-4 mb-3">
-                                <div class="form-label required-field">Fecha de nacimiento</div>
+                                <label id="label-fechanacimiento" for="form-fechanacimiento" class="form-label required-field">Fecha de nacimiento</label>
                                 <input type="date" 
+                                       id="form-fechanacimiento"
                                        class="form-control" 
                                        name="birthDate"
-                                       max="2006-01-01">
+                                       max="2006-01-01"
+                                       aria-labelledby="label-fechanacimiento">
                                 <div class="field-help">
                                     Debes ser mayor de 18 años para registrarte
                                 </div>
@@ -204,20 +210,22 @@
                             
                             <!-- Teléfono -->
                             <div class="col-md-4 mb-3">
-                                <div class="form-label required-field">Teléfono</div>
+                                <label id="label-tlf" for="form-tlf" class="form-label required-field">Teléfono</label>
                                 <input type="tel" 
+                                       id="form-tlf"
                                        class="form-control" 
                                        name="phone"
                                        placeholder="+34 600 000 000"
-                                       autocomplete="tel">
+                                       autocomplete="tel"
+                                       aria-labelledby="label-tlf">
                                 <div class="validation-message" style="display: none;"></div>
                             </div>
                             
                             <!-- País -->
                             <div class="col-md-4 mb-3">
                                 <!-- PROBLEMA: Select sin label apropiado -->
-                                <div class="form-label required-field">País</div>
-                                <select class="form-select" name="country">
+                                <label for="pais" id="label-select" class="form-label required-field">País</label>
+                                <select id="pais" class="form-select" name="country" aria-labelledby="label-select">
                                     <!-- PROBLEMA: Opción por defecto no accesible -->
                                     <option value="">Selecciona tu país</option>
                                     <option value="ES">España</option>
