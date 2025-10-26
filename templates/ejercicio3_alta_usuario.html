@@ -478,7 +478,7 @@
                             
                             <!-- CV/Currículum -->
                             <div class="mb-4">
-                                <div class="form-label">Currículum Vitae (CV)</div>
+                                <label id="label-cv" for="cvFile" class="form-label">Currículum Vitae (CV)</label>
                                 <!-- PROBLEMA: File input sin accesibilidad -->
                                 <div class="file-upload-area" onclick="document.getElementById('cvFile').click()">
                                     <div style="font-size: 2rem; margin-bottom: 1rem;">📄</div>
@@ -491,7 +491,8 @@
                                         name="cv"
                                         accept=".pdf,.doc,.docx"
                                         style="display: none;"
-                                        aria-describedby="cv-help">
+                                        aria-describedby="cv-help"
+                                        aria-labelledby="label-cv">
                                 </div>
                                 <div class="field-help" id="cv-help">
                                     Tu CV nos ayuda a entender mejor tu experiencia profesional
@@ -500,7 +501,7 @@
                             
                             <!-- Foto de perfil -->
                             <div class="mb-4">
-                                <div class="form-label">Foto de perfil (opcional)</div>
+                                <label id="label-profilePhoto" for="profilePhoto" class="form-label">Foto de perfil (opcional)</label>
                                 <div class="file-upload-area" onclick="document.getElementById('profilePhoto').click()">
                                     <div style="font-size: 2rem; margin-bottom: 1rem;">📷</div>
                                     <div style="font-weight: 500;">Subir foto de perfil</div>
@@ -512,7 +513,12 @@
                                         id="profilePhoto"
                                         name="profilePhoto"
                                         accept="image/*"
-                                        style="display: none;">
+                                        style="display: none;"
+                                        aria-labelledby="label-profilePhoto"
+                                        aria-describedby="">
+                                </div>
+                                <div class="field-help" id="cv-help">
+                                    Tu foto dará personalidad a tu perfil
                                 </div>
                             </div>
                             
