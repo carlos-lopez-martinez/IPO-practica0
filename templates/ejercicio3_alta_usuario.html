@@ -351,8 +351,9 @@
                                         max="150000" 
                                         step="1000"
                                         placeholder="45000"
-                                        aria-labelledby="label-salario">
-                                    <div class="field-help">Rango entre €15,000 y €150,000</div>
+                                        aria-labelledby="label-salario"
+                                        aria-describedby="salario-help">
+                                    <div id="salario-help" class="field-help">Rango entre €15,000 y €150,000</div>
                                 </div>
                                 
                                 <!-- Disponibilidad -->
@@ -489,9 +490,10 @@
                                         id="cvFile"
                                         name="cv"
                                         accept=".pdf,.doc,.docx"
-                                        style="display: none;">
+                                        style="display: none;"
+                                        aria-describedby="cv-help">
                                 </div>
-                                <div class="field-help">
+                                <div class="field-help" id="cv-help">
                                     Tu CV nos ayuda a entender mejor tu experiencia profesional
                                 </div>
                             </div>
@@ -517,37 +519,46 @@
                             <!-- Portfolio/Enlaces -->
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <div class="form-label">Portfolio web</div>
+                                    <label id="label-portfolio" for="form-portfolio" class="form-label">Portfolio web</label>
                                     <input type="url" 
+                                        id="form-portfolio"
                                         class="form-control" 
                                         name="portfolio"
-                                        placeholder="https://tu-portfolio.com">
-                                    <div class="field-help">
+                                        placeholder="https://tu-portfolio.com"
+                                        aria-describedby="portfolio-help"
+                                        aria-labelledby="label-portfolio">
+                                    <div class="field-help" id="portfolio-help">
                                         Enlace a tu portfolio o sitio web personal
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
-                                    <div class="form-label">Perfil de LinkedIn</div>
+                                    <label id="label-linkedin" for="form-linkedin" class="form-label">Perfil de LinkedIn</label>
                                     <input type="url" 
+                                        id="form-linkedin"
                                         class="form-control" 
                                         name="linkedin"
-                                        placeholder="https://linkedin.com/in/tu-perfil">
+                                        placeholder="https://linkedin.com/in/tu-perfil"
+                                        aria-labelledby="label-linkedin">
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <div class="form-label">GitHub/GitLab</div>
+                                    <label id="label-github" for="form-github" class="form-label">GitHub/GitLab</label>
                                     <input type="url" 
+                                        id="form-github"
+                                        aria-labelledby="label-github"
                                         class="form-control" 
                                         name="github"
                                         placeholder="https://github.com/tu-usuario">
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
-                                    <div class="form-label">Otro enlace relevante</div>
+                                    <label id="label-enlace-relevante" for="form-enlace-relevante" class="form-label">Otro enlace relevante</label>
                                     <input type="url" 
+                                        id="form-enlace-relevante"
+                                        aria-labelledby="label-enlace-relevante"
                                         class="form-control" 
                                         name="otherLink"
                                         placeholder="https://...">
