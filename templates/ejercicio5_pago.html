@@ -583,56 +583,69 @@
                                             <div class="row">
                                                 <div class="col-12 mb-3">
                                                     <!-- PROBLEMA: Campo tarjeta sin descripción accesible -->
-                                                    <div class="form-label required">Número de tarjeta</div>
+                                                    <label id="label-trajeta-nodescripcion" for="tarjeta-nodescripcion" class="form-label required">Número de tarjeta</label>
                                                     <input type="text" 
+                                                           id="tarjeta-nodescripcion"
                                                            class="form-control" 
                                                            name="cardNumber"
                                                            placeholder="1234 5678 9012 3456"
                                                            maxlength="19"
                                                            autocomplete="cc-number"
-                                                           oninput="formatCardNumber(this)">
+                                                           oninput="formatCardNumber(this)"
+                                                           aria-labelledby="label-trajeta-nodescripcion"
+                                                           aria-describedby="tarjeta-nodescripcion-help">
                                                     <div class="field-error" style="display: none;"></div>
+                                                    <small id="tarjeta-nodescripcion-help" aria-hidden> 
+                                                        Campo de la tarjeta
+                                                    </small>
                                                 </div>
                                             </div>
                                             
                                             <div class="row">
                                                 <div class="col-md-8 mb-3">
-                                                    <div class="form-label required">Nombre del titular</div>
+                                                    <label id="label-nombre-titular" for="form-nombre-titular" class="form-label required">Nombre del titular</label>
                                                     <input type="text" 
+                                                           id="form-nombre-titular"
                                                            class="form-control" 
                                                            name="cardHolder"
                                                            placeholder="Como aparece en la tarjeta"
                                                            autocomplete="cc-name"
-                                                           oninput="updateCardPreview()">
+                                                           oninput="updateCardPreview()"
+                                                           aria-labelledby="label-nombre-titular">
                                                     <div class="field-error" style="display: none;"></div>
                                                 </div>
                                                 
                                                 <div class="col-md-4 mb-3">
                                                     <!-- PROBLEMA: CVV sin explicación accesible -->
-                                                    <div class="form-label required">
+                                                    <label id="label-cvv" for="form-cvv" class="form-label required">
                                                         CVV
                                                         <!-- PROBLEMA: Icono de ayuda sin accesibilidad -->
-                                                        <span style="cursor: help; color: #007bff;" onclick="showCVVHelp()">ℹ️</span>
+                                                        <span style="cursor: help; color: #007bff;" onclick="showCVVHelp()" aria-label="Ayuda para más información">ℹ️</span>
                                                     </div>
                                                     <input type="password" 
+                                                           id="form-cvv"
                                                            class="form-control" 
                                                            name="cvv"
                                                            placeholder="123"
                                                            maxlength="4"
-                                                           autocomplete="cc-csc">
+                                                           autocomplete="cc-csc"
+                                                           aria-required="true"
+                                                           aria-labelledby="label-cvv">
                                                     <div class="field-error" style="display: none;"></div>
                                                 </div>
                                             </div>
                                             
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <div class="form-label required">Mes de expiración</div>
+                                                    <label id="label-mes-expiracion" for="form-mes-expiracion" class="form-label required">Mes de expiración</label>
                                                     <!-- PROBLEMA: Select sin opciones accesibles -->
                                                     <select class="form-select" 
                                                             name="expiryMonth" 
                                                             autocomplete="cc-exp-month"
-                                                            onchange="updateCardPreview()">
-                                                        <option value="">Mes</option>
+                                                            onchange="updateCardPreview()"
+                                                            aria-required="true"
+                                                            aria-labelledby="label-mes-expiracion">
+                                                        <option value="" disabled selected hidden>Mes</option>
                                                         <option value="01">01</option>
                                                         <option value="02">02</option>
                                                         <option value="03">03</option>
@@ -650,12 +663,15 @@
                                                 </div>
                                                 
                                                 <div class="col-md-6 mb-3">
-                                                    <div class="form-label required">Año de expiración</div>
+                                                    <label id="label-año-expiracion" for="form-año-expiracion" class="form-label required">Año de expiración</label>
                                                     <select class="form-select" 
+                                                            id="form-año-expiracion"
                                                             name="expiryYear" 
                                                             autocomplete="cc-exp-year"
-                                                            onchange="updateCardPreview()">
-                                                        <option value="">Año</option>
+                                                            onchange="updateCardPreview()"
+                                                            aria-required="true"
+                                                            aria-labelledby="label-año-experiencia">
+                                                        <option value="" disabled selcted hidden>Año</option>
                                                         <option value="2024">2024</option>
                                                         <option value="2025">2025</option>
                                                         <option value="2026">2026</option>
@@ -670,7 +686,7 @@
                                             
                                             <!-- PROBLEMA: Checkbox guardar tarjeta sin contexto -->
                                             <div class="mb-3">
-                                                <input type="checkbox" name="saveCard" style="margin-right: 0.5rem;">
+                                                <input type="checkbox" name="saveCard" style="margin-right: 0.5rem;" aria-label="Guardar esta tarjeta para futuras compras">
                                                 <span>Guardar esta tarjeta para futuras compras</span>
                                                 <div style="font-size: 0.8rem; color: #64696D; margin-top: 0.25rem;">
                                                     Tus datos se almacenarán de forma segura y encriptada
@@ -682,13 +698,15 @@
                                     <!-- Botones de navegación -->
                                     <div style="display: flex; justify-content: space-between;">
                                         <button type="button" 
-                                                onclick="prevStep()"
-                                                class="btn btn-outline-secondary btn-lg">
+                                                onclick="prevStep()" 
+                                                class="btn btn-outline-secondary btn-lg"
+                                                aria-label="Paso anterior">
                                             ← Anterior
                                         </button>
                                         <button type="button" 
-                                                onclick="nextStep()"
-                                                class="btn btn-primary btn-lg">
+                                                onclick="nextStep()" 
+                                                class="btn btn-primary btn-lg"
+                                                aria-label="Revisar pedido">
                                             Revisar Pedido →
                                         </button>
                                     </div>
