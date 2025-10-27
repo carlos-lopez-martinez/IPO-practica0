@@ -621,7 +621,7 @@
                                                         CVV
                                                         <!-- PROBLEMA: Icono de ayuda sin accesibilidad -->
                                                         <span style="cursor: help; color: #007bff;" onclick="showCVVHelp()" aria-label="Ayuda para más información">ℹ️</span>
-                                                    </div>
+                                                        
                                                     <input type="password" 
                                                            id="form-cvv"
                                                            class="form-control" 
@@ -634,6 +634,8 @@
                                                     <div class="field-error" style="display: none;"></div>
                                                 </div>
                                             </div>
+                                            
+                                        
                                             
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
@@ -696,7 +698,7 @@
                                     </fieldset>
                                     
                                     <!-- Botones de navegación -->
-                                    <div style="display: flex; justify-content: space-between;">
+                                    <div style="display: block; justify-content: space-between;">
                                         <button type="button" 
                                                 onclick="prevStep()" 
                                                 class="btn btn-outline-secondary btn-lg"
