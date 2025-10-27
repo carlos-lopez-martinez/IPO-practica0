@@ -62,11 +62,11 @@
         
         .step.active .step-number {
             background: white;
-            color: #007bff;
+            color: #056FE1;
         }
         
         .step.completed .step-number {
-            background: #28a745;
+            background: #0B8429;
             color: white;
         }
         
@@ -646,18 +646,18 @@
                                                             aria-required="true"
                                                             aria-labelledby="label-mes-expiracion">
                                                         <option value="" disabled selected hidden>Mes</option>
-                                                        <option value="01">01</option>
-                                                        <option value="02">02</option>
-                                                        <option value="03">03</option>
-                                                        <option value="04">04</option>
-                                                        <option value="05">05</option>
-                                                        <option value="06">06</option>
-                                                        <option value="07">07</option>
-                                                        <option value="08">08</option>
-                                                        <option value="09">09</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
+                                                        <option value="01" aria-label="Enero">01</option>
+                                                        <option value="02" aria-label="Febrero">02</option>
+                                                        <option value="03" aria-label="Marzo">03</option>
+                                                        <option value="04" aria-label="Abril">04</option>
+                                                        <option value="05" aria-label="Mayo">05</option>
+                                                        <option value="06" aria-label="Junio">06</option>
+                                                        <option value="07" aria-label="Julio">07</option>
+                                                        <option value="08" aria-label="Agosto">08</option>
+                                                        <option value="09" aria-label="Septiembre">09</option>
+                                                        <option value="10" aria-label="Octubre">10</option>
+                                                        <option value="11" aria-label="Noviembre">11</option>
+                                                        <option value="12" aria-label="Diciembre">12</option>
                                                     </select>
                                                     <div class="field-error" style="display: none;"></div>
                                                 </div>
@@ -670,7 +670,7 @@
                                                             autocomplete="cc-exp-year"
                                                             onchange="updateCardPreview()"
                                                             aria-required="true"
-                                                            aria-labelledby="label-año-experiencia">
+                                                            aria-labelledby="label-año-expiracion">
                                                         <option value="" disabled selcted hidden>Año</option>
                                                         <option value="2024">2024</option>
                                                         <option value="2025">2025</option>
@@ -887,7 +887,8 @@
                                             placeholder="Código promocional"
                                             id="promoCode"
                                             aria-label="Tienes código promocional">
-                                    <button onclick="applyPromoCode()" class="btn btn-outline-primary">
+                                    <button onclick="applyPromoCode()" class="btn btn-outline-primary"
+                                    style="color: #0457D2">
                                         Aplicar
                                     </button>
                                 </div>
