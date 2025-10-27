@@ -62,6 +62,8 @@
 
     <!-- PROBLEMA: Falta skip link -->
 
+
+
     <!-- PROBLEMA: Header sin role banner -->
     <header role="banner" class="hero-section">
         <div class="container">
@@ -81,6 +83,21 @@
             </button>
         </div>
     </header>
+
+
+        <!-- PROBLEMA: Boton de volver-->
+     <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+        <a href="{{ url_for('index') }}" class="btn btn-outline-light" aria-label="Volver al portal", style="color: black; background-color: white;">
+            ← Volver al portal
+        </a>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+  
+
+    
     
     <!-- PROBLEMA: Nav sin role navigation ni aria-label -->
     <nav class="navbar navbar-expand-lg" style="background-color: #f8f9fa;" role="navigation" aria-label="Navegación principal">
@@ -91,11 +108,11 @@
             <!-- PROBLEMA: Links de navegación sin estructura semántica -->
             <div>
                 <!-- PROBLEMA: Links sin contexto -->
-                <a href="#" class="me-3 link-nav">Inicio</a>
+                <a href="#" class="me-3 link-nav" >Inicio</a>
                 <a href="#" class="me-3 link-nav">Artículos</a>
                 <a href="#" class="me-3 link-nav">Tutoriales</a>
                 <a href="#" class="me-3 link-nav">Contacto</a>
-
+                
                 <!-- PROBLEMA: Texto de link genérico -->
                 <a href="#" class="link-sutil">Leer más</a>
             </div>
@@ -132,7 +149,7 @@
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%2328a745'/%3E%3C/svg%3E" 
                             alt="Imagen de React" class="mb-3">
                         
-                        <h4>Tutorial completo de React Hooks</h4>
+                        <h4 >Tutorial completo de React Hooks</h4>
                         <p>Domina los React Hooks con este tutorial paso a paso. 
                         Desde useState hasta hooks personalizados.</p>
                         
@@ -279,6 +296,8 @@
             </div>
         </div>
     </footer>
+
+
     
     <!-- PROBLEMA: Scripts sin defer/async apropiado -->
     <script src="{{ url_for('static', filename='js/portal.js') }}" defer></script>
