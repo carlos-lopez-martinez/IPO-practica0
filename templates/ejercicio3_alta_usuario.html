@@ -113,6 +113,15 @@
             margin-top: 0.25rem;
             font-size: 0.8rem;
         }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px; height: 1px;
+            margin: -1px; padding: 0;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
         
         .success { color: #28a745; }
         .error { color: #dc3545; }
@@ -192,9 +201,10 @@
                                         placeholder="tu@email.com"
                                         autocomplete="email"
                                         aria-labelledby="label-email"
-                                        aria-required="true">
+                                        aria-required="true"
+                                        aria-describedby="email-validation">
                                     <!-- PROBLEMA: Validación en vivo sin accesibilidad -->
-                                    <div class="validation-message" style="display: none;" aria-live="assertive" role="alert"></div>
+                                    <div id="email-validation" class="validation-message" style="display: none;" aria-live="assertive" role="alert"></div>
                                 </div>
                             </div>
                             
@@ -307,11 +317,11 @@
                                         aria-describedby="experiencia-help">
                                     <div class="range-display">
                                         <span>0 años</span>
-                                        <span id="experienceValue">2 años</span>
+                                        <span id="experienceValue" aria-live="polite">2 años</span>
                                         <span>20+ años</span>
                                     </div>
                                     <small id="experiencia-help" hidden>
-                                          Ajusta el rango para indicar tus años de experiencia, de 0 a 20+ años.
+                                        Ajusta el rango para indicar tus años de experiencia, de 0 a 20+ años.
                                     </small>
                                 </div>
                             </div>
@@ -514,12 +524,14 @@
                                         name="cv"
                                         accept=".pdf,.doc,.docx"
                                         style="display: none;"
-                                        aria-describedby="cv-help"
+                                        aria-describedby="cv-help cvFileMessage"
                                         aria-labelledby="label-cv">
                                 </div>
                                 <div class="field-help" id="cv-help">
                                     Tu CV nos ayuda a entender mejor tu experiencia profesional
                                 </div>
+                                <span id="cvFileMessage" aria-live="assertive" hidden>
+                                </span>
                             </div>
                             
                             <!-- Foto de perfil -->
@@ -753,21 +765,27 @@
         
         // PROBLEMA: Manejo de archivos sin accesibilidad
         function handleFileUpload(input, maxSize) {
-            const file = input.files[0];
-            if (!file) return;
-            
-            const uploadArea = input.parentNode;
-            
-            if (file.size > maxSize) {
-                // PROBLEMA: Error no accesible
-                alert('El archivo es muy grande');
-                input.value = '';
+              const file = input.files[0];
+            const msg = document.getElementById(input.id + "Message");
+            if (!file) {
+                msg.textContent = "";
+                msg.classList.add("visually-hidden");
                 return;
             }
-            
-            // PROBLEMA: Cambio visual sin anuncio
-            uploadArea.style.background = '#d4edda';
-            uploadArea.querySelector('div').innerHTML = `✅ ${file.name}`;
+
+            if (file.size > maxSize) {
+                msg.textContent = "El archivo es demasiado grande. El tamaño máximo permitido es de " + (maxSize / 1024 / 1024) + " MB.";
+                msg.classList.remove("visually-hidden");
+                input.value = '';
+                // También puedes agregar feedback visual si quieres
+                input.parentNode.style.background = "#f8d7da";
+                return;
+            }
+
+            msg.textContent = "Archivo " + file.name + " seleccionado correctamente.";
+            msg.classList.remove("visually-hidden");
+            input.parentNode.style.background = '#d4edda';
+            // Feedback visual y accesible
         }
         
         // PROBLEMA: Mostrar mensajes no accesibles
