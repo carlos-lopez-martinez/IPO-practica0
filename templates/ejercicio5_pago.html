@@ -348,7 +348,7 @@
                                                 aria-describedby="">
                                             Continuar →
                                         </button>
-                                        <small id="continuar-help" aria-hidden> 
+                                        <small id="continuar-help" hidden> 
                                             Botón para continuar al siguiente paso del formulario
                                         </small>
                                     </div>
@@ -760,26 +760,32 @@
                                                 ⚠️ Términos y Condiciones Finales
                                             </div>
                                             <div class="mb-2">
-                                                <input type="checkbox" name="acceptTerms" required style="margin-right: 0.5rem;">
-                                                <span>
+                                                <input type="checkbox" name="acceptTerms" required style="margin-right: 0.5rem;" aria-label="Términos" aria-describedby="terminos-help">
+                                                <span id="terminos-help">
                                                     Acepto los 
                                                     <!-- PROBLEMA: Link sin indicar nueva ventana -->
                                                     <a href="#" target="_blank">términos y condiciones de venta</a>
                                                 </span>
                                             </div>
                                             <div class="mb-2">
-                                                <input type="checkbox" name="acceptPrivacy" required style="margin-right: 0.5rem;">
+                                                <input type="checkbox" name="acceptPrivacy" required style="margin-right: 0.5rem;" aria-label="Política" aria-describedby="politica-help">
                                                 <span>
                                                     He leído la 
                                                     <a href="#" target="_blank">política de privacidad</a>
                                                 </span>
+                                                <small id="politica-help" hidden>
+                                                    Política de privacidad de la página
+                                                </small>
                                             </div>
                                             <div class="mb-2">
-                                                <input type="checkbox" name="acceptRefund" required style="margin-right: 0.5rem;">
+                                                <input type="checkbox" name="acceptRefund" required style="margin-right: 0.5rem;" aria-label="politica-devoluciones" aria-describedby="">
                                                 <span>
                                                     Entiendo la 
                                                     <a href="#" target="_blank">política de devoluciones</a>
                                                 </span>
+                                                <small id="politica-devoluciones-help" hidden>
+                                                    Política de devoluciones
+                                                </small>
                                             </div>
                                         </div>
                                     </div>
@@ -814,7 +820,7 @@
                         </div>
                         
                         <!-- PROBLEMA: Sidebar resumen sin landmark -->
-                        <div class="col-lg-4">
+                        <aside class="col-lg-4">
                             <div class="order-summary">
                                 <!-- PROBLEMA: Resumen sin estructura semántica -->
                                 <div style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-align: center;">
@@ -886,7 +892,7 @@
                                     <div style="margin-bottom: 0.5rem;">📦 Garantía de 30 días</div>
                                 </div>
                             </div>
-                        </div>
+                        </aside>
                     </div>
                 </main>
             </div>
