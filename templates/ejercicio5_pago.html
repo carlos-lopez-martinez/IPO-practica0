@@ -345,7 +345,7 @@
                                                 onclick="nextStep()"
                                                 class="btn btn-primary btn-lg"
                                                 aria-label="Botón de continuación al siguiente paso"
-                                                aria-describedby="">
+                                                aria-describedby="continuar-help">
                                             Continuar →
                                         </button>
                                         <small id="continuar-help" hidden> 
@@ -498,7 +498,7 @@
                                                 aria-label="Boton atrás">
                                             ← Anterior
                                         </button>
-                                        <small id="descripcion-btn-anterior-help" aria-hidden> 
+                                        <small id="descripcion-btn-anterior-help" hidden> 
                                             Botón para ir al paso anterior del formulario
                                         </small>
                                         <button type="button" 
@@ -508,7 +508,7 @@
                                                 aria-label="Boton siguiente">
                                             Continuar →
                                         </button>
-                                        <small id="descripcion-btn-adelante-help" aria-hidden> 
+                                        <small id="descripcion-btn-adelante-help" hidden> 
                                             Botón para ir al paso siguiente del formulario
                                         </small>
                                     </div>
@@ -539,7 +539,7 @@
                                             <div class="payment-method" onclick="selectPaymentMethod('paypal')">
                                                 <input type="radio" name="paymentMethod" value="paypal" style="margin-right: 0.5rem;" aria-label="Paypal" aria-describedby="paypal-help">
                                                 <strong>🔵 PayPal</strong>
-                                                <small id="paypal-help" aria-hidden> Opción de Paypal, paga de fomra segura con tu cuenta en Paypal </small>
+                                                <small id="paypal-help" hidden> Opción de Paypal, paga de fomra segura con tu cuenta en Paypal </small>
                                                 <div style="font-size: 0.9rem; color: #64696D;">
                                                     Paga de forma segura con tu cuenta PayPal
                                                 </div>
@@ -549,7 +549,7 @@
                                             <div class="payment-method" onclick="selectPaymentMethod('transfer')">
                                                 <input type="radio" name="paymentMethod" value="transfer" style="margin-right: 0.5rem;" aria-label="Transferencia Bancaria" aria-describedby="transferencia-help">
                                                 <strong>🏦 Transferencia Bancaria</strong>
-                                                <small id="transferencia-help" aria-hidden> Opción de transferencia Bancaria, recibirás las instrucciones por email </small>
+                                                <small id="transferencia-help" hidden> Opción de transferencia Bancaria, recibirás las instrucciones por email </small>
                                                 <div style="font-size: 0.9rem; color: #64696D;">
                                                     Recibirás las instrucciones por email
                                                 </div>
@@ -595,7 +595,7 @@
                                                            aria-labelledby="label-trajeta-nodescripcion"
                                                            aria-describedby="tarjeta-nodescripcion-help">
                                                     <div class="field-error" style="display: none;"></div>
-                                                    <small id="tarjeta-nodescripcion-help" aria-hidden> 
+                                                    <small id="tarjeta-nodescripcion-help" hidden> 
                                                         Campo de la tarjeta
                                                     </small>
                                                 </div>
@@ -700,15 +700,23 @@
                                         <button type="button" 
                                                 onclick="prevStep()" 
                                                 class="btn btn-outline-secondary btn-lg"
-                                                aria-label="Paso anterior">
+                                                aria-label="Paso anterior"
+                                                aria-describedby="btn-anterior-help">
                                             ← Anterior
                                         </button>
+                                        <small id="btn-anterior-help" hidden>
+                                            Botón para ir al paso anterior
+                                        </small>
                                         <button type="button" 
                                                 onclick="nextStep()" 
                                                 class="btn btn-primary btn-lg"
-                                                aria-label="Revisar pedido">
+                                                aria-label="Revisar pedido"
+                                                aria-describedby="revisar-pedido-help">
                                             Revisar Pedido →
                                         </button>
+                                        <small id="revisar-pedido-help" hidden>
+                                            Botón para revisar el pedido
+                                        </small>
                                     </div>
                                 </div>
                                 
@@ -820,77 +828,76 @@
                         </div>
                         
                         <!-- PROBLEMA: Sidebar resumen sin landmark -->
-                        <aside class="col-lg-4">
-                            <div class="order-summary">
-                                <!-- PROBLEMA: Resumen sin estructura semántica -->
-                                <div style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-align: center;">
-                                    📋 Resumen del Pedido
+                        <aside class="order-summary col-lg-4" aria-describedby="aside-help">
+                            <!-- PROBLEMA: Resumen sin estructura semántica -->
+                            <div id="aside-help" style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem; text-align: center;">
+                                📋 Resumen del Pedido
+                            </div>
+                            
+                            <!-- Lista de productos - PROBLEMA: Sin estructura -->
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #dee2e6;">
+                                    <div>
+                                        <div style="font-weight: 500;">Laptop Gaming Pro X1</div>
+                                        <div style="font-size: 0.9rem; color: #64696D;">Cantidad: 1</div>
+                                    </div>
+                                    <div style="font-weight: 500;">€1,299.99</div>
                                 </div>
                                 
-                                <!-- Lista de productos - PROBLEMA: Sin estructura -->
-                                <div style="margin-bottom: 1.5rem;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #dee2e6;">
-                                        <div>
-                                            <div style="font-weight: 500;">Laptop Gaming Pro X1</div>
-                                            <div style="font-size: 0.9rem; color: #64696D;">Cantidad: 1</div>
-                                        </div>
-                                        <div style="font-weight: 500;">€1,299.99</div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #dee2e6;">
+                                    <div>
+                                        <div style="font-weight: 500;">Auriculares Wireless Pro</div>
+                                        <div style="font-size: 0.9rem; color: #64696D;">Cantidad: 2</div>
                                     </div>
-                                    
-                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #dee2e6;">
-                                        <div>
-                                            <div style="font-weight: 500;">Auriculares Wireless Pro</div>
-                                            <div style="font-size: 0.9rem; color: #64696D;">Cantidad: 2</div>
-                                        </div>
-                                        <div style="font-weight: 500;">€399.98</div>
-                                    </div>
+                                    <div style="font-weight: 500;">€399.98</div>
                                 </div>
-                                
-                                <!-- Totales - PROBLEMA: Sin estructura semántica -->
-                                <div style="border-top: 2px solid #dee2e6; padding-top: 1rem;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span>Subtotal:</span>
-                                        <span>€1,699.97</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span>Envío:</span>
-                                        <span id="shippingCost">€0.00</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                        <span>Impuestos (21%):</span>
-                                        <span>€356.99</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                                        <span>Descuento:</span>
-                                        <span style="color: #087722;">-€208.00</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; border-top: 2px solid #007bff; padding-top: 1rem;">
-                                        <span>Total:</span>
-                                        <span style="color: #007bff;">€1,848.96</span>
-                                    </div>
+                            </div>
+                            
+                            <!-- Totales - PROBLEMA: Sin estructura semántica -->
+                            <div style="border-top: 2px solid #dee2e6; padding-top: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Subtotal:</span>
+                                    <span>€1,699.97</span>
                                 </div>
-                                
-                                <!-- PROBLEMA: Código promocional sin accesibilidad -->
-                                <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
-                                    <div style="font-weight: 500; margin-bottom: 0.5rem;">¿Tienes un código promocional?</div>
-                                    <div style="display: flex; gap: 0.5rem;">
-                                        <!-- PROBLEMA: Input sin label -->
-                                        <input type="text" 
-                                               class="form-control" 
-                                               placeholder="Código promocional"
-                                               id="promoCode">
-                                        <button onclick="applyPromoCode()" class="btn btn-outline-primary">
-                                            Aplicar
-                                        </button>
-                                    </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Envío:</span>
+                                    <span id="shippingCost">€0.00</span>
                                 </div>
-                                
-                                <!-- Garantías y seguridad -->
-                                <div style="margin-top: 1.5rem; font-size: 0.9rem; color: #64696D; text-align: center;">
-                                    <div style="margin-bottom: 0.5rem;">🔒 Pago 100% seguro</div>
-                                    <div style="margin-bottom: 0.5rem;">📞 Soporte 24/7</div>
-                                    <div style="margin-bottom: 0.5rem;">📦 Garantía de 30 días</div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Impuestos (21%):</span>
+                                    <span>€356.99</span>
                                 </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                    <span>Descuento:</span>
+                                    <span style="color: #087722;">-€208.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; border-top: 2px solid #007bff; padding-top: 1rem;">
+                                    <span>Total:</span>
+                                    <span style="color: #007bff;">€1,848.96</span>
+                                </div>
+                            </div>
+                            
+                            <!-- PROBLEMA: Código promocional sin accesibilidad -->
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+                                <div style="font-weight: 500; margin-bottom: 0.5rem;">¿Tienes un código promocional?</div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <!-- PROBLEMA: Input sin label -->
+                                    <input type="text" 
+                                            class="form-control" 
+                                            placeholder="Código promocional"
+                                            id="promoCode"
+                                            aria-label="Tienes código promocional">
+                                    <button onclick="applyPromoCode()" class="btn btn-outline-primary">
+                                        Aplicar
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Garantías y seguridad -->
+                            <div style="margin-top: 1.5rem; font-size: 0.9rem; color: #64696D; text-align: center;">
+                                <div style="margin-bottom: 0.5rem;">🔒 Pago 100% seguro</div>
+                                <div style="margin-bottom: 0.5rem;">📞 Soporte 24/7</div>
+                                <div style="margin-bottom: 0.5rem;">📦 Garantía de 30 días</div>
                             </div>
                         </aside>
                     </div>
