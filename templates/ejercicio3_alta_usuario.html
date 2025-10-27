@@ -113,6 +113,15 @@
             margin-top: 0.25rem;
             font-size: 0.8rem;
         }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px; height: 1px;
+            margin: -1px; padding: 0;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
         
         .success { color: #28a745; }
         .error { color: #dc3545; }
@@ -142,8 +151,9 @@
                         <div style="font-size: 0.9rem; color: #6D6F6F;">Paso 1 de 1</div>
                     </div>
                     <div class="progress-bar-custom">
-                        <div class="progress-fill" style="width: 25%"></div>
+                        <div class="progress-fill" style="width: 25%" aria-valuemin="0" aria-maxvalue="100" aria-valuetext="0% completado" aria-valuenow="0" role="progressbar"></div>
                     </div>
+                    <span id="progress-status" aria-live="polite" hidden>0% completado</span>
                     <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #6D6F6F;">
                         Completando información personal...
                     </div>
@@ -174,7 +184,7 @@
                                         aria-labelledby="label-fullName"
                                         aria-describedby="fullName-help"
                                         aria-required="true">
-                                    <div class="character-counter">0/100 caracteres</div>
+                                    <div class="character-counter" aria-live="polite">0/100 caracteres</div>
                                     <!-- PROBLEMA: Mensaje de ayuda no asociado -->
                                     <div id="fullName-help" class="field-help">
                                         Incluye tu nombre y apellidos completos
@@ -191,9 +201,10 @@
                                         placeholder="tu@email.com"
                                         autocomplete="email"
                                         aria-labelledby="label-email"
-                                        aria-required="true">
+                                        aria-required="true"
+                                        aria-describedby="email-validation">
                                     <!-- PROBLEMA: Validación en vivo sin accesibilidad -->
-                                    <div class="validation-message" style="display: none;"></div>
+                                    <div id="email-validation" class="validation-message" style="display: none;" aria-live="assertive" role="alert"></div>
                                 </div>
                             </div>
                             
@@ -306,11 +317,11 @@
                                         aria-describedby="experiencia-help">
                                     <div class="range-display">
                                         <span>0 años</span>
-                                        <span id="experienceValue">2 años</span>
+                                        <span id="experienceValue" aria-live="polite">2 años</span>
                                         <span>20+ años</span>
                                     </div>
                                     <small id="experiencia-help" hidden>
-                                          Ajusta el rango para indicar tus años de experiencia, de 0 a 20+ años.
+                                        Ajusta el rango para indicar tus años de experiencia, de 0 a 20+ años.
                                     </small>
                                 </div>
                             </div>
@@ -485,7 +496,7 @@
                                         placeholder="Cuéntanos un poco sobre ti, tus intereses profesionales y objetivos..."
                                         aria-labelledby="label-bio"
                                         aria-describedby="bio-help"></textarea>
-                                <div class="character-counter">0/500 caracteres</div>
+                                <div class="character-counter" aria-live="polite">0/500 caracteres</div>
                                 <div id="bio-help" class="field-help">
                                     Esta información aparecerá en tu perfil público
                                 </div>
@@ -513,12 +524,14 @@
                                         name="cv"
                                         accept=".pdf,.doc,.docx"
                                         style="display: none;"
-                                        aria-describedby="cv-help"
+                                        aria-describedby="cv-help cvFileMessage"
                                         aria-labelledby="label-cv">
                                 </div>
                                 <div class="field-help" id="cv-help">
                                     Tu CV nos ayuda a entender mejor tu experiencia profesional
                                 </div>
+                                <span id="cvFileMessage" aria-live="assertive" hidden>
+                                </span>
                             </div>
                             
                             <!-- Foto de perfil -->
@@ -537,9 +550,9 @@
                                         accept="image/*"
                                         style="display: none;"
                                         aria-labelledby="label-profilePhoto"
-                                        aria-describedby="">
+                                        aria-describedby="profilePhoto-help">
                                 </div>
-                                <div class="field-help" id="cv-help">
+                                <div class="field-help" id="profilePhoto-help">
                                     Tu foto dará personalidad a tu perfil
                                 </div>
                             </div>
@@ -604,7 +617,7 @@
                                 <div class="checkbox-group">
                                     <div class="mb-3">
                                         <!-- Checkbox requerido con aria-label adecuado -->
-                                        <input type="checkbox" name="agreeTerms" required aria-label="Aceptar términos y condiciones" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="agreeTerms" required aria-label="Aceptar términos y condiciones" style="margin-right: 0.5rem;" aria-required>
                                         <span>
                                         Acepto los 
                                         <a href="#" target="_blank" aria-label="Abrir términos y condiciones en nueva ventana">términos y condiciones de uso</a> 
@@ -613,7 +626,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="checkbox" name="agreePrivacy" required aria-label="Aceptar política de privacidad" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="agreePrivacy" required aria-label="Aceptar política de privacidad" style="margin-right: 0.5rem;" aria-required>
                                         <span>
                                         He leído y acepto la 
                                         <a href="#" target="_blank" aria-label="Abrir política de privacidad en nueva ventana">política de privacidad</a>
@@ -629,7 +642,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="checkbox" name="confirmAge" required aria-label="Confirmar mayoría de edad" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="confirmAge" required aria-label="Confirmar mayoría de edad" style="margin-right: 0.5rem;" aria-required>
                                         <span>
                                         Confirmo que soy mayor de 18 años
                                         </span>
@@ -650,16 +663,25 @@
                             
                             <!-- Botones de acción - PROBLEMA -->
                             <div style="display: flex; gap: 1rem; justify-content: end;">
-                                <button type="button" class="btn btn-outline-secondary">
+                                <button type="button" class="btn btn-outline-secondary" aria-label="Botón limpiar" aria-describedby="btn-limpiar-help">
                                     Limpiar formulario
                                 </button>
-                                <button type="button" class="btn btn-secondary">
+                                <small id="btn-limpiar-help" hidden>
+                                    Botón de limpieza de formulario
+                                </small>
+                                <button type="button" class="btn btn-secondary" aria-label="Botón guardar" aria-describedby="btn-guardar-help">
                                     Guardar como borrador
                                 </button>
+                                <small id="btn-guardar-help" hidden>
+                                    Botón de guardar como borrador el formulario
+                                </small>
                                 <!-- PROBLEMA: Botón submit sin indicar proceso -->
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" aria-label="Completar registro" aria-describedby="btn-completar-help">
                                     Completar registro
                                 </button>
+                                <small id="btn-completar-help" hidden>
+                                    Botón de completar el formulario
+                                </small>
                             </div>
                         </div>
                     </form>
@@ -701,6 +723,7 @@
                 // PROBLEMA: No anuncia cuando se acerca al límite
                 if (currentLength >= maxLength * 0.9) {
                     counter.style.color = '#dc3545';
+                    counter.textContent += ' — Quedan pocos caracteres';
                 } else {
                     counter.style.color = '#6c757d';
                 }
@@ -731,28 +754,38 @@
         // PROBLEMA: Actualizar progreso sin accesibilidad
         function updateProgress(percentage) {
             const progressBar = document.querySelector('.progress-fill');
+            const progressStatus = document.getElementById('progress-status');
             progressBar.style.width = percentage + '%';
             
+            progressBar.setAttribute('aria-valuenow', percentage);
+            progressBar.setAttribute('aria-valuetext', percentage + '% completado');
             // PROBLEMA: No anuncia el cambio de progreso
+            progressStatus.textContent = percentage + '% completado';
         }
         
         // PROBLEMA: Manejo de archivos sin accesibilidad
         function handleFileUpload(input, maxSize) {
-            const file = input.files[0];
-            if (!file) return;
-            
-            const uploadArea = input.parentNode;
-            
-            if (file.size > maxSize) {
-                // PROBLEMA: Error no accesible
-                alert('El archivo es muy grande');
-                input.value = '';
+              const file = input.files[0];
+            const msg = document.getElementById(input.id + "Message");
+            if (!file) {
+                msg.textContent = "";
+                msg.classList.add("visually-hidden");
                 return;
             }
-            
-            // PROBLEMA: Cambio visual sin anuncio
-            uploadArea.style.background = '#d4edda';
-            uploadArea.querySelector('div').innerHTML = `✅ ${file.name}`;
+
+            if (file.size > maxSize) {
+                msg.textContent = "El archivo es demasiado grande. El tamaño máximo permitido es de " + (maxSize / 1024 / 1024) + " MB.";
+                msg.classList.remove("visually-hidden");
+                input.value = '';
+                // También puedes agregar feedback visual si quieres
+                input.parentNode.style.background = "#f8d7da";
+                return;
+            }
+
+            msg.textContent = "Archivo " + file.name + " seleccionado correctamente.";
+            msg.classList.remove("visually-hidden");
+            input.parentNode.style.background = '#d4edda';
+            // Feedback visual y accesible
         }
         
         // PROBLEMA: Mostrar mensajes no accesibles
