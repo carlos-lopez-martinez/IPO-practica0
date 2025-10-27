@@ -142,8 +142,9 @@
                         <div style="font-size: 0.9rem; color: #6D6F6F;">Paso 1 de 1</div>
                     </div>
                     <div class="progress-bar-custom">
-                        <div class="progress-fill" style="width: 25%"></div>
+                        <div class="progress-fill" style="width: 25%" aria-valuemin="0" aria-maxvalue="100" aria-valuetext="0% completado" aria-valuenow="0" role="progressbar"></div>
                     </div>
+                    <span id="progress-status" aria-live="polite" hidden>0% completado</span>
                     <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #6D6F6F;">
                         Completando información personal...
                     </div>
@@ -193,7 +194,7 @@
                                         aria-labelledby="label-email"
                                         aria-required="true">
                                     <!-- PROBLEMA: Validación en vivo sin accesibilidad -->
-                                    <div class="validation-message" style="display: none;"></div>
+                                    <div class="validation-message" style="display: none;" aria-live="assertive" role="alert"></div>
                                 </div>
                             </div>
                             
@@ -653,20 +654,20 @@
                                 <button type="button" class="btn btn-outline-secondary" aria-label="Botón limpiar" aria-describedby="btn-limpiar-help">
                                     Limpiar formulario
                                 </button>
-                                <small id="btn-limpiar-help">
+                                <small id="btn-limpiar-help" hidden>
                                     Botón de limpieza de formulario
                                 </small>
                                 <button type="button" class="btn btn-secondary" aria-label="Botón guardar" aria-describedby="btn-guardar-help">
                                     Guardar como borrador
                                 </button>
-                                <small id="btn-guardar-help">
+                                <small id="btn-guardar-help" hidden>
                                     Botón de guardar como borrador el formulario
                                 </small>
                                 <!-- PROBLEMA: Botón submit sin indicar proceso -->
                                 <button type="submit" class="btn btn-primary" aria-label="Completar registro" aria-describedby="btn-completar-help">
                                     Completar registro
                                 </button>
-                                <small id="btn-completar-help">
+                                <small id="btn-completar-help" hidden>
                                     Botón de completar el formulario
                                 </small>
                             </div>
@@ -741,9 +742,13 @@
         // PROBLEMA: Actualizar progreso sin accesibilidad
         function updateProgress(percentage) {
             const progressBar = document.querySelector('.progress-fill');
+            const progressStatus = document.getElementById('progress-status');
             progressBar.style.width = percentage + '%';
             
+            progressBar.setAttribute('aria-valuenow', percentage);
+            progressBar.setAttribute('aria-valuetext', percentage + '% completado');
             // PROBLEMA: No anuncia el cambio de progreso
+            progressStatus.textContent = percentage + '% completado';
         }
         
         // PROBLEMA: Manejo de archivos sin accesibilidad
