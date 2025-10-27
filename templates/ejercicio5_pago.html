@@ -187,7 +187,7 @@
         }
         
         .field-error {
-            color: #dc3545;
+            color: #C8192A;
             font-size: 0.8rem;
             margin-top: 0.25rem;
         }
@@ -234,25 +234,37 @@
                     <div class="step-indicator">
                         <div class="step-connector"></div>
                         
-                        <div class="step active" data-step="1">
+                        <div class="step active" data-step="1" aria-label="Paso 1" aria-describedby="described-paso1-info">
                             <div class="step-number">1</div>
                             <div class="step-title">Información Personal</div>
                         </div>
-                        
-                        <div class="step" data-step="2">
+                        <small id="described-paso1-info" hidden>
+                            Paso 1 del formulario: Información personal
+                        </small>
+
+                        <div class="step" data-step="2" aria-label="Paso 2" aria-describedby="described-paso2-info">
                             <div class="step-number">2</div>
                             <div class="step-title">Envío y Facturación</div>
                         </div>
+                        <small id="described-paso2-info" hidden>
+                            Paso 2 del formulario: Envío y facturación
+                        </small>
                         
-                        <div class="step" data-step="3">
+                        <div class="step" data-step="3" aria-label="Paso 3" aria-describedby="described-paso3-info">
                             <div class="step-number">3</div>
                             <div class="step-title">Método de Pago</div>
                         </div>
+                        <small id="described-paso3-info" hidden>
+                            Paso 3 del formulario: Método de pago
+                        </small>
                         
-                        <div class="step" data-step="4">
+                        <div class="step" data-step="4" aria-label="Paso 4" aria-describedby="described-paso4-info">
                             <div class="step-number">4</div>
                             <div class="step-title">Confirmación</div>
                         </div>
+                        <small id="described-paso4-info" hidden>
+                            Paso 4 del formulario: Confirmación
+                        </small>
                     </div>
                 </header>
                 
