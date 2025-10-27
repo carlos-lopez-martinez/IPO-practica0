@@ -174,7 +174,7 @@
                                         aria-labelledby="label-fullName"
                                         aria-describedby="fullName-help"
                                         aria-required="true">
-                                    <div class="character-counter">0/100 caracteres</div>
+                                    <div class="character-counter" aria-live="polite">0/100 caracteres</div>
                                     <!-- PROBLEMA: Mensaje de ayuda no asociado -->
                                     <div id="fullName-help" class="field-help">
                                         Incluye tu nombre y apellidos completos
@@ -485,7 +485,7 @@
                                         placeholder="Cuéntanos un poco sobre ti, tus intereses profesionales y objetivos..."
                                         aria-labelledby="label-bio"
                                         aria-describedby="bio-help"></textarea>
-                                <div class="character-counter">0/500 caracteres</div>
+                                <div class="character-counter" aria-live="polite">0/500 caracteres</div>
                                 <div id="bio-help" class="field-help">
                                     Esta información aparecerá en tu perfil público
                                 </div>
@@ -537,9 +537,9 @@
                                         accept="image/*"
                                         style="display: none;"
                                         aria-labelledby="label-profilePhoto"
-                                        aria-describedby="">
+                                        aria-describedby="profilePhoto-help">
                                 </div>
-                                <div class="field-help" id="cv-help">
+                                <div class="field-help" id="profilePhoto-help">
                                     Tu foto dará personalidad a tu perfil
                                 </div>
                             </div>
@@ -604,7 +604,7 @@
                                 <div class="checkbox-group">
                                     <div class="mb-3">
                                         <!-- Checkbox requerido con aria-label adecuado -->
-                                        <input type="checkbox" name="agreeTerms" required aria-label="Aceptar términos y condiciones" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="agreeTerms" required aria-label="Aceptar términos y condiciones" style="margin-right: 0.5rem;" aria-required>
                                         <span>
                                         Acepto los 
                                         <a href="#" target="_blank" aria-label="Abrir términos y condiciones en nueva ventana">términos y condiciones de uso</a> 
@@ -613,7 +613,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="checkbox" name="agreePrivacy" required aria-label="Aceptar política de privacidad" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="agreePrivacy" required aria-label="Aceptar política de privacidad" style="margin-right: 0.5rem;" aria-required>
                                         <span>
                                         He leído y acepto la 
                                         <a href="#" target="_blank" aria-label="Abrir política de privacidad en nueva ventana">política de privacidad</a>
@@ -629,7 +629,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="checkbox" name="confirmAge" required aria-label="Confirmar mayoría de edad" style="margin-right: 0.5rem;">
+                                        <input type="checkbox" name="confirmAge" required aria-label="Confirmar mayoría de edad" style="margin-right: 0.5rem;" aria-required>
                                         <span>
                                         Confirmo que soy mayor de 18 años
                                         </span>
@@ -650,16 +650,25 @@
                             
                             <!-- Botones de acción - PROBLEMA -->
                             <div style="display: flex; gap: 1rem; justify-content: end;">
-                                <button type="button" class="btn btn-outline-secondary">
+                                <button type="button" class="btn btn-outline-secondary" aria-label="Botón limpiar" aria-describedby="btn-limpiar-help">
                                     Limpiar formulario
                                 </button>
-                                <button type="button" class="btn btn-secondary">
+                                <small id="btn-limpiar-help">
+                                    Botón de limpieza de formulario
+                                </small>
+                                <button type="button" class="btn btn-secondary" aria-label="Botón guardar" aria-describedby="btn-guardar-help">
                                     Guardar como borrador
                                 </button>
+                                <small id="btn-guardar-help">
+                                    Botón de guardar como borrador el formulario
+                                </small>
                                 <!-- PROBLEMA: Botón submit sin indicar proceso -->
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" aria-label="Completar registro" aria-describedby="btn-completar-help">
                                     Completar registro
                                 </button>
+                                <small id="btn-completar-help">
+                                    Botón de completar el formulario
+                                </small>
                             </div>
                         </div>
                     </form>
@@ -701,6 +710,7 @@
                 // PROBLEMA: No anuncia cuando se acerca al límite
                 if (currentLength >= maxLength * 0.9) {
                     counter.style.color = '#dc3545';
+                    counter.textContent += ' — Quedan pocos caracteres';
                 } else {
                     counter.style.color = '#6c757d';
                 }
