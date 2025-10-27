@@ -710,7 +710,7 @@
                                     </fieldset>
                                     
                                     <!-- Botones de navegación -->
-                                    <div style="display: block; justify-content: space-between;">
+                                    <nav style="display: block; justify-content: space-between;">
                                         <button type="button" 
                                                 onclick="prevStep()" 
                                                 class="btn btn-outline-secondary btn-lg"
@@ -731,7 +731,7 @@
                                         <small id="revisar-pedido-help" hidden>
                                             Botón para revisar el pedido
                                         </small>
-                                    </div>
+                                    </nav>
                                 </div>
                                 
                                 <!-- PASO 4: Confirmación - PROBLEMAS -->
@@ -816,9 +816,14 @@
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <button type="button" 
                                                 onclick="prevStep()"
-                                                class="btn btn-outline-secondary btn-lg">
+                                                class="btn btn-outline-secondary btn-lg"
+                                                aria-label="Boton paso atrás"
+                                                aria-describedby="btn-anterior-paso4">
                                             ← Anterior
                                         </button>
+                                        <small id="btn-anterior-paso4" hidden>
+                                            Botón para ir al anterior paso del formulario
+                                        </small>
                                         
                                         <div style="text-align: center;">
                                             <!-- PROBLEMA: Total sin formato accesible -->
@@ -833,9 +838,14 @@
                                         <!-- PROBLEMA: Botón final sin indicar proceso -->
                                         <button type="submit" 
                                                 class="btn btn-success btn-lg"
-                                                style="font-size: 1.2rem; padding: 1rem 2rem;">
+                                                style="font-size: 1.2rem; padding: 1rem 2rem;"
+                                                aria-label="Botón proceso"
+                                                aria-describedby="btn-proceso-realizarpago">
                                             💳 Realizar Pago
                                         </button>
+                                        <small id="btn-proceso-realizarpago" hidden>
+                                            Botón de proceso de realizar pago
+                                        </small>
                                     </div>
                                 </div>
                             </form>
